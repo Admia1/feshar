@@ -5,7 +5,7 @@ from .forms import RegisterForm, LoginForm
 from django.contrib.auth import  login,logout
 from .models import Puser
 
-def user_register_page(request):
+def user_register(request):
     # if this is a POST request we need to process the form data
     template_register = 'polls/register.html'
     template_loged_in = 'polls/logedin.html'
@@ -98,7 +98,3 @@ def user_login(request):
         else:
             form = LoginForm()
         return render(request, template_login, {'form': form})
-
-def user_login_page(request):
-    template = 'polls/login.html'
-    return render(request, template)
