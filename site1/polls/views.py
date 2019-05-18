@@ -10,7 +10,7 @@ def user_register(request):
     template_register = 'polls/register.html'
     template_loged_in = 'polls/logedin.html'
     if(request.user.is_authenticated):
-        return render(request, template, )
+        return render(request, template_loged_in )
     else:
         if request.method == 'POST':
             # create a form instance and populate it with data from the request:
@@ -40,7 +40,7 @@ def user_register(request):
                         form.cleaned_data['password']
                     )
                     user.first_name = form.cleaned_data['first_name']
-                    user.last_name = f
+                    user.last_name = form.cleaned_data['last_name']
                     orm.cleaned_data['last_name']
                     user.phone_number = form.cleaned_data['phone_number']
                     user.save()
@@ -86,7 +86,7 @@ def user_login(request):
                 if User.objects.filter(username=form.cleaned_data['username']).exists():
                     user = User.objects.get(username=form.cleaned_data['username'])
                     if user.check_password(form.cleaned_data['password']):
-                        login(requset, user)
+                        login(request, user)
                         return HttpResponseRedirect('/')
 
                 return render(request, template_login, {
