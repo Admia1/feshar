@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from .forms import RegisterForm, LoginForm
 from django.contrib.auth import  login,logout
-from .models import Puser
+from .models import PollUser
 
 def user_register(request):
     # if this is a POST request we need to process the form data
@@ -17,40 +17,27 @@ def user_register(request):
             form = RegisterForm(request.POST)
             # check whether it's valid:
             if form.is_valid():
-                if User.objects.filter(username=form.cleaned_data['username']).exists():
+                if User.objects.filter(username=form.cleaned_data['student_number']).exists():
                     return render(request, template_register, {
                         'form': form,
-                        'error_message': 'Username already exists.'
-                    })
-                elif User.objects.filter(email=form.cleaned_data['email']).exists():
-                    return render(request, template_register, {
-                        'form': form,
-                        'error_message': 'Email already exists.'
-                    })
-                elif form.cleaned_data['password'] != form.cleaned_data['password_repeat']:
-                    return render(request, template_register, {
-                        'form': form,
-                        'error_message': 'Passwords do not match.'
+                        'error_message': 'student number already exists.'
                     })
                 else:
                     # Create the user:
                     user = User.objects.create_user(
-                        form.cleaned_data['username'],
-                        form.cleaned_data['email'],
-                        form.cleaned_data['password']
+                        username = form.cleaned_data['student_number'],
+                        password = form.cleaned_data['phone_number'],
                     )
-                    user.first_name = form.cleaned_data['first_name']
-                    user.last_name = form.cleaned_data['last_name']
-                    orm.cleaned_data['last_name']
-                    user.phone_number = form.cleaned_data['phone_number']
                     user.save()
+                    polluser = PollUser(user = user)
+                    polluser.first_name = form.cleaned_data['first_name']
+                    polluser.last_name = form.cleaned_data['last_name']
+                    polluser.phone_number = form.cleaned_data['phone_number']
+                    polluser.student_number = form.cleaned_data['student_number']
+                    polluser.can_presure = form.cleaned_data['can_presure']
+                    polluser.save()
 
-                    puser = Puser(
-                        user=user
-                    )
-                    puser.save()
 
-                    # Login the user
                     login(request, user)
 
                     # redirect to accounts page:
