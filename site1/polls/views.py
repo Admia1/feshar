@@ -11,8 +11,6 @@ def user_register_page(request):
     template2 = 'polls/logedin.html'
     if(request.user.is_authenticated):
         return render(request, template2, )
-
-
     else:
         if request.method == 'POST':
             # create a form instance and populate it with data from the request:
