@@ -1,0 +1,25 @@
+{% extends "polls/base.html" %}
+{% block data %}<li><a href="/logout">خروج</a></li>{% endblock %}
+{% block content %}
+
+    <div class="container">
+        <form action="{% url 'polls:logout' %}" method="post">
+            {% csrf_token %}
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Register</div>
+                    <div class="panel-body">
+                        {% if error_message %}
+                            <p class="bg-danger p-d ml-b">{{ error_message }}</p>
+                        {% endif %}
+
+
+                        <div class="col-md-6 col-md-offset-4">
+                            <input type="submit" value="logout" class="btn btn-success">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
