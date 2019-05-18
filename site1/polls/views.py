@@ -80,7 +80,7 @@ def user_login(request):
     else:
         if request.method == 'POST':
             # create a form instance and populate it with data from the request:
-            form = RegisterForm(request.POST)
+            form = LoginForm(request.POST)
             # check whether it's valid:
             if form.is_valid():
                 if User.objects.filter(username=form.cleaned_data['username']).exists():
@@ -97,7 +97,6 @@ def user_login(request):
        # No post data availabe, let's just show the page.
         else:
             form = LoginForm()
-
         return render(request, template_login, {'form': form})
 
 def user_login_page(request):
