@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 from .forms import RegisterForm, LoginForm
 from django.contrib.auth import  login, logout
-from .models import PollUser,Section
+from .models import PollUser,Section,EventDay,USR
 from django.urls import reverse
 
 def register_view(request):
@@ -88,23 +88,22 @@ def login_view(request):
 
 def home_view(request, massage = ""):
     # if this is a POST request we need to process the form data
-    template = 'polls/home2.html'
+    template = 'polls/home.html'
 
     if(request.user.is_authenticated):
-        section_detail = [{day.shift : (day.related_users.count()<=3)} for day in Section.objects.order_by('-day')]
+        section_detail = [[section for section in day.section_set.order_by('index')] for day in EventDay.objects.all().order_by('-day')]
         return render(request, template, {'section_detail': section_detail, 'massage': massage})
     else:
         return HttpResponseRedirect(reverse('/register/'))
 
 def take_view(request, section_pk):
-
     if(request.user.is_authenticated):
         section = Section.objects.get(pk=section_pk)
         if section.exists():
-            if section.related_users.count()>=3:
+            if section.usr_set.count()>=3:
                 return HttpResponseRedirect(reverse('polls:home', args=("fulled section",)))
             else:
-                section.related_users.get_or_create(pk = request.user.pk)
+                USR.objects.get_or_create(user = request.user, section=section)
                 return HttpResponseRedirect(revese('polls:home', args=("you reserved!",)))
         else:
             return HttpResponseRedirect(reverse('polls:home', args=("no such section",)))
@@ -112,16 +111,13 @@ def take_view(request, section_pk):
         return HttpResponseRedirect(reverse('polls:register'))
 
 
-def del_view(request, section_pk):
+def delete_view(request, section_pk):
     if(request.user.is_authenticated):
+        usr = USR.objects.get(section_pk=section_pk, user=request.user)
         try:
-            section = Section.objects.get(pk=section_pk)
-            try:
-                section.related_users.remove(pk=request.user.pk)
-                return HttpResponseRedirect(revese('polls:home', args=('section removed')))
-            except:
-                return HttpResponseRedirect(revese('polls:home', args=('not reserved section')))
+            usr.remove(pk=request.user.pk)
+            return HttpResponseRedirect(revese('polls:home', args=('section removed')))
         except:
-            return HttpResponseRedirect(reverse('polls:home', args=('no such section')))
+            return HttpResponseRedirect(revese('polls:home', args=('not reserved section')))
     else:
         return HttpResponseRedirect(reverse('polls:register'))

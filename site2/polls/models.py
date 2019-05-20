@@ -11,9 +11,16 @@ class PollUser(models.Model):
 
     can_presure = models.BooleanField(default=0)
 
-
+class EventDay(models.Model):
+    day = models.DateField()
+    
 
 class Section(models.Model):
-    day = models.IntegerField()
-    shift = models.IntegerField()
-    related_users = models.ManyToManyField(PollUser)
+    eventday = models.ForeignKey(EventDay, on_delete=models.CASCADE)
+    index = models.IntegerField(default=1)
+    def show(self):
+        return "Time #%d"%self.index
+
+class USR(models.Model):
+    user = models.ForeignKey(User ,on_delete=models.CASCADE)
+    section = models.ForeignKey(Section ,on_delete=models.CASCADE)

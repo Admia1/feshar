@@ -1,33 +1,35 @@
-<!-- {% extends "polls/base.html" %}
+{% extends "polls/base.html" %}
 {% block data %}<li><a href="/logout">خروج</a></li>{% endblock %}
-{% block content %} -->
+{% block content %}
+<div class="container">
+    <form action="{% url 'polls:logout' %}" method="post">
+        {% csrf_token %}
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Register</div>
+                <div class="panel-body">
+                    {% if error_message %}
+                        <p class="bg-danger p-d ml-b">{{ error_message }}</p>
+                    {% endif %}
 
+                    <div class="container">
+                      <form>
+                        <div class="form-group">
+                          <label for="sel1">Select list (select one):</label>
+                          <select  class="form-control" id="sel1">
+                            {% for day in section_detail %}
+                            {% for section in day %}
+                              <option value= {{section.pk}} > {{section.show}} </option>
+                            {% endfor %}
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </form>
+                    </div>
 
-  <div id="app">
-      {% verbatim %}
-      <br>
-      {{ chosenDay }}
-      <br>
-      <select name="day" v-model="chosenDay">
-        <option v-for="day in days" :value="day.value">{{ "haha" }}</option>
-      </select><br>
-      <select name="shift">
-        <option v-for="shift in shifts[chosenDay]" :value="shift.value">{{ shift.display }}</option>
-      </select>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
-
-    <script type="text/javascript">
-      new Vue({
-        el: '#app',
-        data:{
-          chosenDay: 0,
-
-          days: {% endverbatim %}{{section_detail}}{% verbatim %}
-
-        }
-      })
-    </script>
-    {% endverbatim %}
-{% endblock content %}
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
