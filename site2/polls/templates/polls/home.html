@@ -1,6 +1,6 @@
 {% extends "polls/base.html" %}
 {% block data %}
-<a href="/logout"class="logout-submit">خروج</a>
+<a href="{% url 'polls:logout' %}"class="logout-submit">خروج</a>
 {% endblock %}
 {% block content %}
 <div class="container">
@@ -42,8 +42,8 @@
                           {% endfor %}
                       </select>
                     </div>
-                    <div class="col-md-6 col-md-offset-5">
-                        <input type="submit" value="رزرو" class="btn btn-success">
+                    <div class="col-md-6 col-md-offset-5 ">
+                        <input type="submit" value="رزرو" class="btn btn-success ">
                     </div>
                 </div>
             </div>

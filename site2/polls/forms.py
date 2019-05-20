@@ -11,7 +11,7 @@ class RegisterForm(forms.Form):
     phone_number = forms.CharField(widget=forms.NumberInput(attrs={'class':'form-control'}))
     student_number = forms.CharField(widget=forms.NumberInput(attrs={'class':'form-control'}))
     entry_year = forms.IntegerField(widget=forms.NumberInput(attrs={'class':'form-control'}))
-    can_presure = forms.BooleanField(widget=forms.CheckboxInput(attrs={'class':'form-control'}), required=0)
+    can_presure = forms.BooleanField(widget=forms.CheckboxInput(attrs={'class':'form-control'}), required=0, )
 
     '''
     user

@@ -1,6 +1,6 @@
 {% extends "polls/base.html" %}
 {% block data %}
-<a href="/register"class="logout-submit">ثبت‌نام</a>
+<a href="{% url 'polls:register' %}"class="logout-submit">ثبت‌نام</a>
 {% endblock %}
 {% block content %}
 <div class="container">

@@ -1,6 +1,6 @@
 {% extends "polls/base.html" %}
 {% block data %}
-<a href="/login" class=" logout-submit">ورود</a>
+<a href="{% url 'polls:login' %}" class=" logout-submit">ورود</a>
 {% endblock %}
 {% block content %}
 <div class="container">
@@ -46,8 +46,10 @@
                     </div>
                     <div class="form-group clearfix">
                         <label for="{{ form.first_name.id_for_label }}" class="col-md-4 control-label text-right">آیا از نحوه گرفتن فشار خون کاملا آگاهید؟</label>
-                        <div class="col-md-6">
+                        <div class="col-md-6" >
                             {{ form.can_presure }}
+                            <!-- <input type="checkbox" class="default">
+                            <span class="slider round"></span> -->
                         </div>
                         <div class="col-md-6 col-md-offset-4">
                             <input type="submit" value="ثبت‌نام" class="btn btn-success">
@@ -59,3 +61,8 @@
     </form>
 </div>
 {% endblock %}
+<!-- {% block scripts %}
+<script type="text/javascript">
+  $("[name='my-checkbox']").bootstrapSwitch();
+</script>
+{% endblock scripts %} -->
