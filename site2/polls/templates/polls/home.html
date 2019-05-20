@@ -2,31 +2,47 @@
 {% block data %}<li><a href="/logout">خروج</a></li>{% endblock %}
 {% block content %}
 <div class="container">
-    <form action="{% url 'polls:logout' %}" method="post">
+
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">تایم های رزرو شده</div>
+        <div class="panel-body">
+          <div class="col-md-6 col-md-offset-0">
+          {% for usr in usr_detail %}
+          <form action="{% url 'polls:delete' usr.pk %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="لغو" class="btn btn-danger btn-xs" name="iii">
+            <label for="iii">{{ usr.section.show }}</label>
+          </form>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <form action="{% url 'polls:take' %}" method="post">
         {% csrf_token %}
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
+                <div class="panel-heading">ورود</div>
                 <div class="panel-body">
                     {% if error_message %}
                         <p class="bg-danger p-d ml-b">{{ error_message }}</p>
                     {% endif %}
-
-                    <div class="container">
-                      <form>
-                        <div class="form-group">
-                          <label for="sel1">Select list (select one):</label>
-                          <select  class="form-control" id="sel1">
-                            {% for day in section_detail %}
-                            {% for section in day %}
-                              <option value= {{section.pk}} > {{section.show}} </option>
-                            {% endfor %}
-                            {% endfor %}
-                          </select>
-                        </div>
-                      </form>
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">SELECT SECTION</label>
+                      <select class="form-control" id="exampleFormControlSelect1" name="section_pk">
+                          {% for day in section_detail %}
+                          {% for section in day %}
+                            <option value= {{section.pk}} > {{section.show}} </option>
+                          {% endfor %}
+                          {% endfor %}
+                      </select>
                     </div>
-
+                    <div class="col-md-6 col-md-offset-4">
+                        <input type="submit" value="ورود" class="btn btn-success">
+                    </div>
                 </div>
             </div>
         </div>
