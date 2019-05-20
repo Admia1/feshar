@@ -91,7 +91,7 @@ def home_view(request, massage = ""):
     template = 'polls/home.html'
 
     if(request.user.is_authenticated):
-        section_detail = [[section for section in day.section_set.order_by('index')] for day in EventDay.objects.all().order_by('-day')]
+        section_detail = [[section for section in day.section_set.order_by('index')] for day in EventDay.objects.all().order_by('day')]
         usr_detail = [usr for usr in USR.objects.filter(user=request.user)]
         return render(request, template, {'section_detail': section_detail, 'massage': massage, 'usr_detail': usr_detail})
     else:

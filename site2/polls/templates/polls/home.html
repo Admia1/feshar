@@ -7,7 +7,7 @@
 
   <div class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">
-      <div class="panel-heading">تایم های رزرو شده</div>
+      <div class="panel-heading">تایم های رزرو شده توسط شما</div>
         <div class="panel-body">
           <div class="col-md-6 col-md-offset-0">
           {% for usr in usr_detail %}
@@ -27,13 +27,13 @@
         {% csrf_token %}
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">ورود</div>
+                <div class="panel-heading">شیفت های موجود</div>
                 <div class="panel-body">
                     {% if error_message %}
                         <p class="bg-danger p-d ml-b">{{ error_message }}</p>
                     {% endif %}
                     <div class="form-group">
-                      <label for="exampleFormControlSelect1">SELECT SECTION</label>
+                      <label for="exampleFormControlSelect1">لطفا از میان شیفت های موجود شیفت های مورد نظر خود را انتخاب کنید</label>
                       <select class="form-control" id="exampleFormControlSelect1" name="section_pk">
                           {% for day in section_detail %}
                           {% for section in day %}
@@ -42,8 +42,8 @@
                           {% endfor %}
                       </select>
                     </div>
-                    <div class="col-md-6 col-md-offset-4">
-                        <input type="submit" value="ورود" class="btn btn-success">
+                    <div class="col-md-6 col-md-offset-5">
+                        <input type="submit" value="رزرو" class="btn btn-success">
                     </div>
                 </div>
             </div>
