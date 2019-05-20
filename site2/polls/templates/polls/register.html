@@ -1,5 +1,7 @@
 {% extends "polls/base.html" %}
-{% block data %}<li><a href="/login">ورود</a></li>{% endblock %}
+{% block data %}
+<a href="/login" class=" logout-submit">ورود</a>
+{% endblock %}
 {% block content %}
 <div class="container">
     <form action="{% url 'polls:register' %}" method="post">
