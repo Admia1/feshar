@@ -1,0 +1,33 @@
+<!-- {% extends "polls/base.html" %}
+{% block data %}<li><a href="/logout">خروج</a></li>{% endblock %}
+{% block content %} -->
+
+
+  <div id="app">
+      {% verbatim %}
+      <br>
+      {{ chosenDay }}
+      <br>
+      <select name="day" v-model="chosenDay">
+        <option v-for="day in days" :value="day.value">{{ "haha" }}</option>
+      </select><br>
+      <select name="shift">
+        <option v-for="shift in shifts[chosenDay]" :value="shift.value">{{ shift.display }}</option>
+      </select>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+
+    <script type="text/javascript">
+      new Vue({
+        el: '#app',
+        data:{
+          chosenDay: 0,
+
+          days: {% endverbatim %}{{section_detail}}{% verbatim %}
+
+        }
+      })
+    </script>
+    {% endverbatim %}
+{% endblock content %}

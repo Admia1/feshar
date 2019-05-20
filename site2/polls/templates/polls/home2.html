@@ -1,7 +1,6 @@
-{% extends "polls/base.html" %}
+<!-- {% extends "polls/base.html" %}
 {% block data %}<li><a href="/logout">خروج</a></li>{% endblock %}
-{% block content %}
-
+{% block content %} -->
 <div class="container">
     <form action="{% url 'polls:logout' %}" method="post">
         {% csrf_token %}
@@ -19,10 +18,9 @@
                         <div class="form-group">
                           <label for="sel1">Select list (select one):</label>
                           <select  class="form-control" id="sel1">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
+                            {% for a in section_detail %}
+                              <option value= 1> {{forloop.counter}} </option>
+                            {% endfor %}
                           </select>
                         </div>
                       </form>

@@ -14,7 +14,6 @@ class PollUser(models.Model):
 
 
 class Section(models.Model):
-    work_date = models.DateField()
-    start_time = models.TimeField()
-    end_time = models.TimeField()
+    day = models.IntegerField()
+    shift = models.IntegerField()
     related_users = models.ManyToManyField(PollUser)
