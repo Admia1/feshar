@@ -12,5 +12,5 @@ urlpatterns = [
     path('delete/<int:usr_pk>/', views.delete_view ,name='delete'),
     path('info/<int:polluser_pk>/', views.info_user_view, name='userinfo'),
      url('info/', views.info_view, name='info'),
-    # url('', views.register_view, name='base'),
+    url('', views.register_view, name='base'),
 ]

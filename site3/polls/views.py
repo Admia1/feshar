@@ -34,7 +34,8 @@ def register_view(request):
                     polluser.last_name = form.cleaned_data['last_name']
                     polluser.phone_number = form.cleaned_data['phone_number']
                     # polluser.entry_year = form.cleaned_data['entry_year']
-                    polluser.entry_year = request.POST['entry_year']-1
+                    polluser.entry_year = int(request.POST['entry_year'])
+                    polluser.entry_year -= 1
                     polluser.student_number = form.cleaned_data['student_number']
                     polluser.can_presure = form.cleaned_data['can_presure']
                     polluser.save()
