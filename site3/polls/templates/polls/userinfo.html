@@ -1,0 +1,64 @@
+{% extends "polls/base.html" %}
+{% block data %}
+<a href="{% url 'polls:logout' %}"class="logout-submit">خروج</a>
+{% if request.user.is_staff %}
+<<a href="{% url 'polls:info' %}" class="logout-submit">اطلاعات شرکت‌کنندگان</a>>
+{% endif %}
+{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">اطلاعات ‌ ‌ {{ polluser.first_name }}-{{ polluser.last_name }}</div>
+        <div class="panel-body">
+          <div class="col-md-6 col-md-offset-0">
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <td>نام</td>
+                  <td>{{polluser.first_name}}</td>
+                </tr>
+                <tr>
+                  <td>نام خانوادگی</td>
+                  <td>{{polluser.last_name}}</td>
+                </tr>
+                <tr>
+                  <td>شماره دانشجویی</td>
+                  <td>{{polluser.f_student_number}}</td>
+                </tr>
+                <tr>
+                  <td>ورودی</td>
+                  <td>{{polluser.show_year}}</td>
+                </tr>
+                <tr>
+                  <td>شماره تلفن</td>
+                  <td>{{polluser.f_phone_number}}</td>
+                </tr>
+                <tr>
+                  <td>آیا به نحوه گرفتن فشار خون آگاه است</td>
+                  <td>{{polluser.can_str}}</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">شیفت های رزرو شده</div>
+        <div class="panel-body">
+          <div class="col-md-6 col-md-offset-0">
+            <ul>
+              {% for usr in polluser.usr_set.all %}
+                <li>{{ usr.section.show }}</li>
+              {% endfor %}
+            </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
