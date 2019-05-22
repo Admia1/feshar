@@ -43,18 +43,21 @@
                         {{ form.entry_year }}
                       </div>
                     </div> -->
-                    <div class="col-md-6">
-                      <label for="{{ form.password_repeat.id_for_label }}" class="col-md-4 control-label text-right">ورودی</label>
+                    <div class="form-group clearfix">
+                      <label for="" class="col-md-4 control-label text-right">ورودی</label>
+                      <div class="col-md-6">
+
                       <select class="form-control" id="exampleFormControlSelect1" name="entry_year">
                         {% for name in valid_entry %}
                         <option value={{forloop.counter}} >{{name}}</option>
                         {% endfor %}
                       </select>
+                    </div>
                       <br>
                     </div>
                     <div class="form-group clearfix">
                         <label for="{{ form.first_name.id_for_label }}" class="col-md-4 control-label text-right">آیا از نحوه گرفتن فشار خون کاملا آگاهید؟</label>
-                        <div class="col-md-6" >
+                        <div class="col-md-1" sytle="text-align: right">
                             {{ form.can_presure }}
                             <!-- <input type="checkbox" class="default">
                             <span class="slider round"></span> -->
