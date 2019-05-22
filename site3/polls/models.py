@@ -73,7 +73,7 @@ class EventDay(models.Model):
     day = models.IntegerField()
 
     def show(self):
-        if day<100:
+        if self.day<100:
            return farsi(self.day)+" خرداد "
         else:
             return farsi(self.day-100)+" تیر "
