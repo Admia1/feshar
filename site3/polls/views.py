@@ -20,7 +20,7 @@ def register_view(request):
                 if User.objects.filter(username=form.cleaned_data['student_number']).exists():
                     return render(request, template, {
                         'form': form,
-                        'error_message': 'student number already exists.'
+                        'error_message': 'شما قبلا ثبت نام کرده اید'
                     })
                 else:
                     # Create the user:
@@ -80,7 +80,7 @@ def login_view(request):
 
                 return render(request, template, {
                     'form': form,
-                    'error_message': 'Wrong username or password'
+                    'error_message': 'شماره دانشجویی یا رمز عبور اشتباه می باشد'
                 })
 
        # No post data availabe, let's just show the page.
@@ -148,6 +148,6 @@ def info_user_view(request ,polluser_pk):
             polluser = PollUser.objects.get(pk = polluser_pk)
             return render(request, template, {'polluser' : polluser})
         except:
-            return render(request, template, {'error_message': "no such polluser"})
+            return render(request, template, {'error_message': "همچین کاربری وجود ندارد"})
     else:
         return HttpResponseRedirect(reverse('polls:home'))
