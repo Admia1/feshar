@@ -73,7 +73,10 @@ class EventDay(models.Model):
     day = models.IntegerField()
 
     def show(self):
-        return farsi(self.day)+" خرداد "
+        if day<100:
+           return farsi(self.day)+" خرداد "
+        else:
+            return farsi(self.day-100)+" تیر "
 
 class Section(models.Model):
     eventday = models.ForeignKey(EventDay, on_delete=models.CASCADE)
