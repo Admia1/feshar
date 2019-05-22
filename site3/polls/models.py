@@ -62,7 +62,8 @@ class PollUser(models.Model):
             return "بله"
         else:
             return "خیر"
-
+    def __str__(self):
+        return self.student_number
     def f_student_number(self):
         return farsi(self.student_number)
     def f_phone_number(self):
