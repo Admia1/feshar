@@ -112,7 +112,7 @@ def take_view(request):
                         if usr.section.eventday == section.eventday:
                             if usr.section.index%4 == section.index%4:
                                  return HttpResponseRedirect(reverse('polls:home'))
-                            
+                polluser = PollUser.objects.get(user=request.user)
                 USR.objects.create(polluser=polluser, section=section)
                 return HttpResponseRedirect(reverse('polls:home'))
         else:
