@@ -108,9 +108,10 @@ def take_view(request):
                 return HttpResponseRedirect(reverse('polls:home'))
             else:
                 for usr in USR.objects.all():
-                    if usr.section.eventday == section.eventday:
-                        if usr.section.index%4 == section.index%4:
-                             return HttpResponseRedirect(reverse('polls:home'))
+                    if usr.polluser.user == request.user:
+                        if usr.section.eventday == section.eventday:
+                            if usr.section.index%4 == section.index%4:
+                                 return HttpResponseRedirect(reverse('polls:home'))
                             
                 USR.objects.create(polluser=polluser, section=section)
                 return HttpResponseRedirect(reverse('polls:home'))
