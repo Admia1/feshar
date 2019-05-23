@@ -90,6 +90,8 @@ class Section(models.Model):
             ret = "ایسنگاه اول "
         if station ==2 :
             ret = "ایستگاه دوم "
+        if station ==3 :
+            ret = "ایستگاه سوم"
             
         if(tim==1):
             ret+=  " شیفت اول ساعت ۸ الی ۱۰:۳۰"
