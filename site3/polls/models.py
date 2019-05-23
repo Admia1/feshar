@@ -83,14 +83,22 @@ class Section(models.Model):
     eventday = models.ForeignKey(EventDay, on_delete=models.CASCADE)
     index = models.IntegerField(default=1)
     def show(self):
-        if(self.index==1):
-            ret=  " شیفت اول ساعت ۸ الی ۱۰:۳۰"
-        if(self.index==2):
-            ret= " شیفت دوم ساعت ۱۰:۳۰ الی ۱۳"
-        if(self.index==3):
-            ret= " شیفت سوم ساعت ۱۶ الی ۱۸:۳۰"
-        if(self.index==4):
-            ret= " شیفت چهارم ساعت ۱۸:۳۰ الی ۲۱"
+        station = (self.index-1)//4 + 1
+        tim = (self.index-1)%4 + 1
+        
+        if station ==1 :
+            ret = "ایسنگاه اول "
+        if station ==2 :
+            ret = "ایستگاه دوم "
+            
+        if(tim==1):
+            ret+=  " شیفت اول ساعت ۸ الی ۱۰:۳۰"
+        if(tim==2):
+            ret+= " شیفت دوم ساعت ۱۰:۳۰ الی ۱۳"
+        if(tim==3):
+            ret+= " شیفت سوم ساعت ۱۶ الی ۱۸:۳۰"
+        if(tim==4):
+            ret+= " شیفت چهارم ساعت ۱۸:۳۰ الی ۲۱"
         ret = self.eventday.show() + ret
         return ret
 
