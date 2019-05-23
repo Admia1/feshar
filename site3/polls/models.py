@@ -86,7 +86,7 @@ class Section(models.Model):
         if(self.index==1):
             ret=  " شیفت اول ساعت ۸ الی ۱۰:۳۰"
         if(self.index==2):
-            ret= " شیفت دوم ساعت ۱۰:۳۰ الی ۱۲"
+            ret= " شیفت دوم ساعت ۱۰:۳۰ الی ۱۳"
         if(self.index==3):
             ret= " شیفت سوم ساعت ۱۶ الی ۱۸:۳۰"
         if(self.index==4):
