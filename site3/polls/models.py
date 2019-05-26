@@ -57,7 +57,7 @@ class PollUser(models.Model):
     student_number = models.CharField(max_length=20, default="1234")
     entry_year = models.IntegerField()
     can_presure = models.BooleanField(default=0)
-    sex = models.CharField(default=1)
+    sex = models.IntegerField(default=1)
 
     def show_year(self):
         return entry_year_show(self.entry_year)
