@@ -1,6 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+def sex_show(x):
+    if(x==0):
+        return "آقا"
+    if(x==1):
+        return "خانم"
+    return "جنسیت"
+
 def entry_year_show(x):
     arr = [
     "مهر ۹۷",
@@ -50,12 +57,13 @@ class PollUser(models.Model):
     student_number = models.CharField(max_length=20, default="1234")
     entry_year = models.IntegerField()
     can_presure = models.BooleanField(default=0)
+    sex = models.CharField(default=1)
 
     def show_year(self):
         return entry_year_show(self.entry_year)
 
     def show_name(self):
-        return self.first_name + " " + self.last_name
+        return sex_show(self.sex) + " " + self.first_name + " " + self.last_name
 
     def can_str(self):
         if self.can_presure:
@@ -72,7 +80,7 @@ class PollUser(models.Model):
 
 class EventDay(models.Model):
     day = models.IntegerField()
-
+    
     def show(self):
         if self.day<100:
            return farsi(self.day)+" خرداد "
@@ -82,15 +90,17 @@ class EventDay(models.Model):
 class Section(models.Model):
     eventday = models.ForeignKey(EventDay, on_delete=models.CASCADE)
     index = models.IntegerField(default=1)
+    station = models.IntegerField(defualt=1)
+    
     def show(self):
-        station = (self.index-1)//4 + 1
+        
         tim = (self.index-1)%4 + 1
         
-        if station ==1 :
+        if self.station ==1 :
             ret = "ایسنگاه اول "
-        if station ==2 :
+        if self.station ==2 :
             ret = "ایستگاه دوم "
-        if station ==3 :
+        if self.station ==3 :
             ret = "ایستگاه سوم"
             
         if(tim==1):
