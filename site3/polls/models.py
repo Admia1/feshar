@@ -90,7 +90,7 @@ class EventDay(models.Model):
 class Section(models.Model):
     eventday = models.ForeignKey(EventDay, on_delete=models.CASCADE)
     index = models.IntegerField(default=1)
-    station = models.IntegerField(defualt=1)
+    station = models.IntegerField(default=1)
     
     def show(self):
         
