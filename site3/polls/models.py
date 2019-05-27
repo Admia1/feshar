@@ -101,13 +101,13 @@ class Section(models.Model):
         if self.station ==3 :
             ret = "ایستگاه سوم"
 
-        if(index==1):
+        if(self.index==1):
             ret+=  " شیفت اول ساعت ۸ الی ۱۱"
-        if(index==2):
+        if(self.index==2):
             ret+= " شیفت دوم ساعت ۱۱ الی ۱۴"
-        if(index==3):
+        if(self.index==3):
             ret+= " شیفت سوم ساعت ۱۴ الی ۱۷"
-        if(index==4):
+        if(self.index==4):
             ret+= " شیفت چهارم ساعت ۱۷ الی ۲۰"
         ret = self.eventday.show() + ret
         return ret
