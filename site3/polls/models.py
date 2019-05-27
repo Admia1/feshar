@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 def sex_show(x):
     if(x==0):
-        return "آقا"
+        return "آقای"
     if(x==1):
         return "خانم"
     return "جنسیت"
@@ -80,7 +80,7 @@ class PollUser(models.Model):
 
 class EventDay(models.Model):
     day = models.IntegerField()
-    
+
     def show(self):
         if self.day<100:
            return farsi(self.day)+" خرداد "
@@ -91,26 +91,24 @@ class Section(models.Model):
     eventday = models.ForeignKey(EventDay, on_delete=models.CASCADE)
     index = models.IntegerField(default=1)
     station = models.IntegerField(default=1)
-    
+
     def show(self):
-        
-        tim = (self.index-1)%4 + 1
-        
+
         if self.station ==1 :
             ret = "ایسنگاه اول "
         if self.station ==2 :
             ret = "ایستگاه دوم "
         if self.station ==3 :
             ret = "ایستگاه سوم"
-            
-        if(tim==1):
-            ret+=  " شیفت اول ساعت ۸ الی ۱۰:۳۰"
-        if(tim==2):
-            ret+= " شیفت دوم ساعت ۱۰:۳۰ الی ۱۳"
-        if(tim==3):
-            ret+= " شیفت سوم ساعت ۱۶ الی ۱۸:۳۰"
-        if(tim==4):
-            ret+= " شیفت چهارم ساعت ۱۸:۳۰ الی ۲۱"
+
+        if(index==1):
+            ret+=  " شیفت اول ساعت ۸ الی ۱۱"
+        if(index==2):
+            ret+= " شیفت دوم ساعت ۱۱ الی ۱۴"
+        if(index==3):
+            ret+= " شیفت سوم ساعت ۱۴ الی ۱۷"
+        if(index==4):
+            ret+= " شیفت چهارم ساعت ۱۷ الی ۲۰"
         ret = self.eventday.show() + ret
         return ret
 
