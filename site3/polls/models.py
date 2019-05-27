@@ -77,6 +77,12 @@ class PollUser(models.Model):
     def f_phone_number(self):
         return farsi(self.phone_number)
 
+    def is_gp_student(self):
+        if len(self.student_number) == 10:
+            if self.student_number[2:7] == "12104":
+                return True
+        return False
+
 
 class EventDay(models.Model):
     day = models.IntegerField()
