@@ -116,13 +116,18 @@ class Section(models.Model):
         return self.usr_set.count() >= 3
 
     def anti_tatbiq(self):
-        if self.is_full():
+        if self.usr_set.count() == 3:
             a=0
             for usr in self.usr_set.all():
                 a+=usr.polluser.sex
 
-            if a==0 or a>=3:
+            if a==0 :
                 return True
+            elif a==3 :
+                if self.station == 3:
+                    return True
+        elif self.usr_set.count() >  3:
+            return True
         return False
 
     def show_detail(self):
