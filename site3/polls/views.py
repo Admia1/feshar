@@ -89,37 +89,30 @@ def login_view(request):
             form = LoginForm()
         return render(request, template, {'form': form})
 
-
-def home_view(request, massage = ""):
-    # if this is a POST request we need to process the form data
+def home(request):
     template = 'polls/home.html'
-
     if request.user.is_authenticated :
+        if request.method == 'POST':
+            polluser = PollUser.objects.get(user=request.user)
+            section = Section.objects.get(pk=request.POST['section_pk'])
+
+            usrs = section.usr_set.all()
+            if len(usrs) >= 3:
+                error_message = "this section is full"
+            elif len(usrs)==2 and usrs[0].polluser.sex==usrs[1].polluser.sex==polluser.sex:
+                error_message = "3 girl or 3 boys is not allowed :D"
+            else:
+                if USR.objects.filter(section__index=section.index, polluser=polluser).exists():
+                    error_message = "you got it right now in this time"
+                else:
+                    USR.objects.create(polluser=polluser, section=section)
+
         section_detail = [[section for section in day.section_set.order_by('index', 'station') if section.usr_set.count()<3] for day in EventDay.objects.all().order_by('day')]
         usr_detail = [usr for usr in USR.objects.filter(polluser__user=request.user)]
-        return render(request, template, {'section_detail': section_detail, 'massage': massage, 'usr_detail': usr_detail})
+        return render(request, template, {'section_detail': section_detail, 'error_message': error_message, 'usr_detail': usr_detail})
     else:
         return HttpResponseRedirect(reverse('polls:register'))
 
-def take_view(request):
-    if request.user.is_authenticated :
-        section = Section.objects.get(pk=request.POST['section_pk'])
-        if section:
-            if section.usr_set.count()>=3:
-                return HttpResponseRedirect(reverse('polls:home'))
-            else:
-                for usr in USR.objects.all():
-                    if usr.polluser.user == request.user:
-                        if usr.section.eventday == section.eventday:
-                            if usr.section.index == section.index:
-                                 return HttpResponseRedirect(reverse('polls:home'))
-                polluser = PollUser.objects.get(user=request.user)
-                USR.objects.create(polluser=polluser, section=section)
-                return HttpResponseRedirect(reverse('polls:home'))
-        else:
-            return HttpResponseRedirect(reverse('polls:home'))
-    else:
-        return HttpResponseRedirect(reverse('polls:register'))
 
 
 def delete_view(request, usr_pk):
