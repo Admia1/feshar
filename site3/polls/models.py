@@ -112,6 +112,15 @@ class Section(models.Model):
         ret = self.eventday.show() + ret
         return ret
 
+    def is_full(self):
+        return self.usr_set.count() >= 3
+
+    def anti_tatbiq(self):
+        if self.is_full():
+            return section.usr_set[0].polluser.sex == section.usr_set[1].polluser.sex == section.usr_set[2].polluser.sex
+        else:
+            return False
+
     def show_detail(self):
         ret = self.show()
         if self.usr_set.count() >= 3:
