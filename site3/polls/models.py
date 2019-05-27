@@ -117,7 +117,7 @@ class Section(models.Model):
 
     def anti_tatbiq(self):
         if self.is_full():
-            return section.usr_set[0].polluser.sex == section.usr_set[1].polluser.sex == section.usr_set[2].polluser.sex
+            return self.usr_set[0].polluser.sex == self.usr_set[1].polluser.sex == self.usr_set[2].polluser.sex
         else:
             return False
 
