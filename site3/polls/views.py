@@ -92,20 +92,22 @@ def login_view(request):
 def home(request):
     template = 'polls/home.html'
     if request.user.is_authenticated :
+        error_message = ""
         if request.method == 'POST':
             polluser = PollUser.objects.get(user=request.user)
             section = Section.objects.get(pk=request.POST['section_pk'])
 
             usrs = section.usr_set.all()
             if len(usrs) >= 3:
-                error_message = "this section is full"
+                error_message = "این شیفت در این تاریخ و ایستگاه پر شده است"
             elif len(usrs)==2 and usrs[0].polluser.sex==usrs[1].polluser.sex==polluser.sex:
-                error_message = "3 girl or 3 boys is not allowed :D"
+                error_message = "با توجه به طرح تطبیق امکان حضور سه پسر یا سه دختر در یک ایستگاه وجود ندارد!!!"
             else:
                 if USR.objects.filter(section__index=section.index, polluser=polluser).exists():
-                    error_message = "you got it right now in this time"
+                    error_message = "شما قبلا در این روز و تاریخ شیفتی رزرو کرده اید"
                 else:
                     USR.objects.create(polluser=polluser, section=section)
+                    error_message = "رزرو شد"
 
         section_detail = [[section for section in day.section_set.order_by('index', 'station') if section.usr_set.count()<3] for day in EventDay.objects.all().order_by('day')]
         usr_detail = [usr for usr in USR.objects.filter(polluser__user=request.user)]
