@@ -89,7 +89,7 @@ def login_view(request):
             form = LoginForm()
         return render(request, template, {'form': form})
 
-def home(request):
+def home_view(request):
     template = 'polls/home.html'
     if request.user.is_authenticated :
         error_message = ""
