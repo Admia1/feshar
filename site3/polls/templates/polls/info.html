@@ -8,7 +8,7 @@
 <div class="container">
   <div class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">
-      <div class="panel-heading" {% if section.usr_set.count()==3 and (section.usr_set[0].polluser.sex==section.usr_set[1].polluser.sex==section.usr_set[2].polluser.sex) %}style="color:red"{% endif %}>{{ section.show }}</div>
+      <div class="panel-heading" {% if section.usr_set.count==3 and (section.usr_set[0].polluser.sex==section.usr_set[1].polluser.sex==section.usr_set[2].polluser.sex) %}style="color:red"{% endif %}>{{ section.show }}</div>
         <div class="panel-body">
           <div class="col-md-6 col-md-offset-0">
             <table class="table">
