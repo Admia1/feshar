@@ -11,7 +11,7 @@
           <div class="col-md-6 col-md-offset-0">
             <table class="table">
               <tbody>
-                {% for polluser in PollUser.objects.all %}
+                {% for polluser in pollusers %}
                 <tr>
                   <td><a href="{% url 'polls:userinfo' polluser.pk %}">{{ polluser.show_name }}</a></td>
                   <td>polluser_usr_set.count</td>

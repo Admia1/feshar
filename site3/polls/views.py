@@ -156,6 +156,7 @@ def info_user_view(request ,polluser_pk):
 def detail_view(request):
     if request.user.is_staff:
         template = 'polls/detail.html'
-        return render(request, template, )
+        pollusers = PollUser.objects.all()
+        return render(request, template, {'pollusers':pollusers})
     else:
         return HttpResponseRedirect(reverse('polls:home'))
