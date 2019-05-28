@@ -14,7 +14,7 @@
                 {% for polluser in pollusers %}
                 <tr>
                   <td><a href="{% url 'polls:userinfo' polluser.pk %}">{{ polluser.show_name }}</a></td>
-                  <td>polluser_usr_set.count</td>
+                  <td>{{polluser_usr_set.count}}</td>
                 </tr>
                 {% endfor %}
               </tbody>
