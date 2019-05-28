@@ -152,3 +152,14 @@ def info_user_view(request ,polluser_pk):
             return render(request, template, {'error_message': "همچین کاربری وجود ندارد"})
     else:
         return HttpResponseRedirect(reverse('polls:home'))
+
+def detail_view(request):
+    if request.user.is_staff:
+        template = 'polls/detail.html'
+        all_pollusers_detail = {polluser:0 for polluser in PollUser.objects.all()}
+        for usr in USR.objects.all():
+            all_pollusers_detail[usr.polluser] +=1
+
+        return render(request, template, {'all_pollusers_detail':all_pollusers_detail, })
+    else:
+        return HttpResponseRedirect(reverse('polls:home'))
