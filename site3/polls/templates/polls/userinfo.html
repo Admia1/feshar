@@ -1,9 +1,6 @@
 {% extends "polls/base.html" %}
 {% block data %}
 <a href="{% url 'polls:logout' %}"class="logout-submit">خروج</a>
-{% if request.user.is_staff %}
-<<a href="{% url 'polls:info' %}" class="logout-submit">اطلاعات شرکت‌کنندگان</a>>
-{% endif %}
 {% endblock %}
 {% block content %}
 <div class="container">
