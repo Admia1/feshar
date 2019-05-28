@@ -164,7 +164,7 @@ def allusers_view(request):
 def gp_student_view(request):
     if request.user.is_staff:
         template = 'polls/gpstudent.html'
-        pollusers = [pu for pu in PollUser.objects.order_by('entry_year') if is_gp_student=True]
+        pollusers = [pu for pu in PollUser.objects.order_by('entry_year') if pu.is_gp_student()==True]
         return render(request, template, {'pollusers':pollusers})
     else:
         return HttpResponseRedirect(reverse('polls:home'))
@@ -172,7 +172,7 @@ def gp_student_view(request):
 def ngp_student_view(request):
     if request.user.is_staff:
         template = 'polls/ngpstudent.html'
-        pollusers = [pu for pu in PollUser.objects.order_by('entry_year') if is_gp_student=False]
+        pollusers = [pu for pu in PollUser.objects.order_by('entry_year') if pu.is_gp_student()==False]
         return render(request, template, {'pollusers':pollusers})
     else:
         return HttpResponseRedirect(reverse('polls:home'))
