@@ -11,10 +11,16 @@
           <div class="col-md-6 col-md-offset-0">
             <table class="table">
               <tbody>
+                <tr>
+                  <td>نام و نام خانوادگی</td>
+                  <td>تعداد شیفت ها</td>
+                  <td>توانایی فشار خون گرفت</td>
+                </tr>
                 {% for polluser in pollusers %}
                 <tr>
                   <td><a href="{% url 'polls:userinfo' polluser.pk %}">{{ polluser.show_name }}</a></td>
                   <td>{{polluser.usr_set.count}}</td>
+                  <td>{{polluser.can_str}}</td>
                 </tr>
                 {% endfor %}
               </tbody>
