@@ -6,7 +6,7 @@
 <div class="container">
   <div class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">
-      <div class="panel-heading" >اطلاعات شرکت‌کنندگان</div>
+      <div class="panel-heading" >اطلاعات کاربران</div>
         <div class="panel-body">
           <div class="col-md-8 col-md-offset-0">
             <table class="table">
@@ -33,33 +33,6 @@
   </div>
 </div>
 
-<div class="container">
-  <div class="col-md-8 col-md-offset-2">
-    <div class="panel panel-default">
-      <div class="panel-heading" >افراد نیازمند آموزش</div>
-        <div class="panel-body">
-          <div class="col-md-8 col-md-offset-0">
-            <table class="table">
-              <tbody>
-                <tr>
-                  <th>نام</th>
-                  <th>شماره تماس</th>
-                </tr>
-                {% for polluser in pollusers %}
-                {% if polluser.can_presure %}
-                {% else %}
-                <tr>
-                  <td><a href="{% url 'polls:userinfo' polluser.pk %}">{{ polluser.show_name }}</a></td>
-                  <td>{{ polluser.f_phone_number }}</td>
-                </tr>
-                {% endif %}
-                {% endfor %}
-              </tbody>
-            </table>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 {% endblock %}

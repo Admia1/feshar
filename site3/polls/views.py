@@ -153,9 +153,33 @@ def info_user_view(request ,polluser_pk):
     else:
         return HttpResponseRedirect(reverse('polls:home'))
 
-def detail_view(request):
+def allusers_view(request):
     if request.user.is_staff:
-        template = 'polls/detail.html'
+        template = 'polls/allusers.html'
+        pollusers = PollUser.objects.order_by('entry_year')
+        return render(request, template, {'pollusers':pollusers})
+    else:
+        return HttpResponseRedirect(reverse('polls:home'))
+
+def gp_student_view(request):
+    if request.user.is_staff:
+        template = 'polls/gpstudent.html'
+        pollusers = PollUser.objects.order_by('entry_year')
+        return render(request, template, {'pollusers':pollusers})
+    else:
+        return HttpResponseRedirect(reverse('polls:home'))
+
+def ngp_student_view(request):
+    if request.user.is_staff:
+        template = 'polls/ngpstudent.html'
+        pollusers = PollUser.objects.order_by('entry_year')
+        return render(request, template, {'pollusers':pollusers})
+    else:
+        return HttpResponseRedirect(reverse('polls:home'))
+
+def cant_view(request):
+    if request.user.is_staff:
+        template = 'polls/cant.html'
         pollusers = PollUser.objects.order_by('entry_year')
         return render(request, template, {'pollusers':pollusers})
     else:

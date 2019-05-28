@@ -29,8 +29,11 @@
         <div class="container">
           {% block data %}{% endblock %}
           {% if request.user.is_staff %}
-          <a href="{% url 'polls:info' %}" class="logout-submit">اطلاعات شیفت ها</a>
-          <a href="{% url 'polls:detail' %}" class="logout-submit">اطلاعات شرکت‌کنندگان</a>
+          <a href="{% url 'polls:allusers' %}" class="logout-submit">کاربران</a>
+          <a href="{% url 'polls:info' %}" class="logout-submit">شیفت ها</a>
+          <a href="{% url 'polls:gp' %}" class="logout-submit">پزشکی</a>
+          <a href="{% url 'polls:ngp' %}" class="logout-submit">غیر‌پزشکی</a>
+          <a href="{% url 'polls:cant' %}" class="logout-submit">نیازمند آموزش</a>
           {% endif %}
             <div class="navbar-header">
                 <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">

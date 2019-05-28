@@ -8,7 +8,12 @@ urlpatterns = [
     url('login/', views.login_view, name='login'),
     url('logout.', views.logout_view, name='logout'),
     url('home/', views.home_view, name='home'),
-    url('detail/', views.detail_view, name='detail'),
+    url('allusers/', views.allusers_view, name='allusers'),
+    url('gp/', views.gp_student_view, name='gp'),
+    url('ngp/', views.ngp_student_view, name='ngp'),
+    url('cant/', views.cant_view, name='cant'),
+
+
     #url('take/', views.take_view ,name='take'),
     path('delete/<int:usr_pk>/', views.delete_view ,name='delete'),
     path('info/<int:polluser_pk>/', views.info_user_view, name='userinfo'),
