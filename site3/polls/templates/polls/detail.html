@@ -6,13 +6,13 @@
 <div class="container">
   <div class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">
-      <div class="panel-heading" {% if section.anti_tatbiq %}style="color:red"{% endif %}>{{ section.show }}</div>
+      <div class="panel-heading" >اطلاعات شرکت‌کنندگان</div>
         <div class="panel-body">
           <div class="col-md-8 col-md-offset-0">
             <table class="table">
               <tbody>
                 <tr>
-                  <th>نام و نام خانوادگی</th>
+                  <th>نام</th>
                   <th>تعداد شیفت ها</th>
                   <th>سال ورودی</th>
                   <th>توانایی فشار خون گرفتن</th>
@@ -23,6 +23,32 @@
                   <td>{{polluser.usr_set.count}}</td>
                   <td>{{polluser.show_year}}</td>
                   <td>{{polluser.can_str}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading" >افراد نیازمند آموزش</div>
+        <div class="panel-body">
+          <div class="col-md-8 col-md-offset-0">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <th>نام</th>
+                  <th>شماره تماس</th>
+                </tr>
+                {% for polluser in pollusers.filter(can_presure=0) %}
+                <tr>
+                  <td><a href="{% url 'polls:userinfo' polluser.pk %}">{{ polluser.show_name }}</a></td>
+                  <td>{{ polluser.f_phone_number }}</td>
                 </tr>
                 {% endfor %}
               </tbody>
