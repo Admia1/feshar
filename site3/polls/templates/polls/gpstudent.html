@@ -17,7 +17,6 @@
                 </tr>
                 {% for polluser in pollusers %}
                 {% if polluser.is_gp_student %}
-                {% else %}
                 {% if polluser.usr_set.count %}
                 <tr>
                   <td><a href="{% url 'polls:userinfo' polluser.pk %}">{{ polluser.show_name }}</a></td>
