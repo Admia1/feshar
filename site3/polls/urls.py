@@ -9,8 +9,8 @@ urlpatterns = [
     url('logout.', views.logout_view, name='logout'),
     url('home/', views.home_view, name='home'),
     url('allusers/', views.allusers_view, name='allusers'),
-    url('gp/', views.gp_student_view, name='gp'),
     url('ngp/', views.ngp_student_view, name='ngp'),
+    url('gp/', views.gp_student_view, name='gp'),
     url('cant/', views.cant_view, name='cant'),
 
 
