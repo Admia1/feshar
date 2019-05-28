@@ -8,14 +8,14 @@
     <div class="panel panel-default">
       <div class="panel-heading" {% if section.anti_tatbiq %}style="color:red"{% endif %}>{{ section.show }}</div>
         <div class="panel-body">
-          <div class="col-md-6 col-md-offset-0">
+          <div class="col-md-8 col-md-offset-0">
             <table class="table">
               <tbody>
                 <tr>
-                  <td>نام و نام خانوادگی</td>
-                  <td>تعداد شیفت ها</td>
-                  <td>سال ورودی</td>
-                  <td>توانایی فشار خون گرفت</td>
+                  <th>نام و نام خانوادگی</th>
+                  <th>تعداد شیفت ها</th>
+                  <th>سال ورودی</th>
+                  <th>توانایی فشار خون گرفتن</th>
                 </tr>
                 {% for polluser in pollusers %}
                 <tr>
