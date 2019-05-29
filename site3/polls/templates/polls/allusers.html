@@ -13,14 +13,14 @@
               <tbody>
                 <tr>
                   <th>نام</th>
-                  <th>تعداد شیفت ها</th>
-                  <th>سال ورودی</th>
+                  <th>تعداد شیفت</th>
+                  <th>ورودی</th>
                   <th>توانایی فشار خون گرفتن</th>
                 </tr>
                 {% for polluser in pollusers %}
                 <tr>
                   <td><a href="{% url 'polls:userinfo' polluser.pk %}">{{ polluser.show_name }}</a></td>
-                  <td>{{polluser.usr_set.count}}</td>
+                  <td>{{polluser.f_usr_count}}</td>
                   <td>{{polluser.show_year}}</td>
                   <td>{{polluser.can_str}}</td>
                 </tr>
