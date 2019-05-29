@@ -84,7 +84,7 @@ class PollUser(models.Model):
         return False
 
     def f_usr_count(self):
-        return farsi(polluser.usr_set.count())
+        return farsi(self.usr_set.count())
 
 
 class EventDay(models.Model):
