@@ -16,22 +16,21 @@
   <body>
     <tbody>
       <table class="table">
-    {% for sec_list in section_detail %}
-    {% for section in sec_list %}
-        <tr>
-          <th>{{ section.show }}</th>
-        </tr>
-          {% for usr in section.usr_set.all %}
-          <tr>
-            <td>{{ usr.polluser.show_name }}</td>
-            <td>{{ usr.polluser.f_student_number }}</td
-            <td></td>
-            <td>{{ usr.polluser.f_national_id }}</td>
-          </tr>
-          {% endfor %}
-    {% endfor %}
-    {% endfor %}
-  </table>
-</tbody>
+        {% for sec_list in section_detail %}
+        {% for section in sec_list %}
+            <tr>
+              <th>{{ section.show }}</th>
+            </tr>
+              {% for usr in section.usr_set.all %}
+              <tr>
+                <td>{{ usr.polluser.show_name }}</td>
+                <td>{{ usr.polluser.f_student_number }}</td
+                <td></td>
+                <td>{{ usr.polluser.f_national_id }}</td>
+              </tr>
+        {% endfor %}
+        {% endfor %}
+      </table>
+    </tbody>
   </body>
 </html>

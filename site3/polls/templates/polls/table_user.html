@@ -15,12 +15,14 @@
   </head>
   <body>
     <table class="table">
-      <tbody>
+      <thead>
         <tr>
           <th>نام</th>
           <th>کد ملی</th>
           <th>شماره دانشجویی</th>
         </tr>
+      </thead>
+        <tbody>
         {% for polluser in pollusers %}
         {% if polluser.usr_set.count %}
         <tr>
