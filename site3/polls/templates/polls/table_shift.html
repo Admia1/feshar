@@ -12,13 +12,13 @@
         <tr>
           <td>{{ section.show }}</td>
         </tr>
-        <tr>
           {% for usr in section.usr_set.all %}
-          <td>{{ usr.polluser.show_name }}</td>
-          <td>{{ usr.polluser.f_student_number }}</td>
-          <td>{{ usr.polluser.f_national_id }}</td>
+          <tr>
+            <td>{{ usr.polluser.show_name }}</td>
+            <td>{{ usr.polluser.f_student_number }}</td>
+            <td>{{ usr.polluser.f_national_id }}</td>
+          </tr>
           {% endfor %}
-        </tr>
       </tbody>
     </table>
     {% endfor %}
