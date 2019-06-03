@@ -204,6 +204,6 @@ def get_national_id_view(request):
                 polluser.save()
                 return HttpResponseRedirect(reverse('polls:home'))
         else:
-            form = RegisterForm()
+            form = NationalIdForm()
         return render(request, template, {'form': form})
     return HttpResponseRedirect(reverse('polls:register'))
