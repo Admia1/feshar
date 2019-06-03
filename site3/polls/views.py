@@ -197,7 +197,7 @@ def get_national_id_view(request):
     template = 'polls/get_national_id.html'
     if(request.user.is_authenticated):
         if request.method == 'POST':
-            form = RegisterForm(request.POST)
+            form = NationalIdForm(request.POST)
             if form.is_valid():
                 polluser = PollUser.objects.get(user=request.user)
                 polluser.national_id = form.cleaned_data['national_id']
