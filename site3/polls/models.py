@@ -77,6 +77,8 @@ class PollUser(models.Model):
         return farsi(self.student_number)
     def f_phone_number(self):
         return farsi(self.phone_number)
+    def f_national_id(self):
+        return farsi(self.national_id)
 
     def is_gp_student(self):
         if len(self.student_number) == 10:
@@ -126,19 +128,14 @@ class Section(models.Model):
         return self.usr_set.count() >= 3
 
     def anti_tatbiq(self):
-        if self.usr_set.count() == 3:
-            a=0
-            for usr in self.usr_set.all():
-                a+=usr.polluser.sex
-
-            if a==0 :
-                return True
-            elif a==3 :
-                if self.station == 3:
-                    return True
-        elif self.usr_set.count() >  3:
+        a=0
+        for usr in self.usr_set.all():
+            a+=usr.polluser.sex
+        if a==0 :
             return True
-        return False
+        elif a>=3 :
+            if self.station == 3:
+                return True
 
     def show_detail(self):
         ret = self.show()
