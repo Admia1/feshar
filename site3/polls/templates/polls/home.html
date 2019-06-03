@@ -14,7 +14,7 @@
           <form action="{% url 'polls:delete' usr.pk %}" method="post">
             {% csrf_token %}
             <input type="submit" value="لغو" class="btn btn-danger btn-xs" name="iii">
-            <label for="iii" {%if usr.section.anti_tatbiq%}style="color:red"{%endif%}>{{ usr.section.show }}</label>
+            <label for="iii" {%if usr.section.anti_tatbiq%} {%endif%}>{{ usr.section.show }}</label>
           </form>
           {% endfor %}
         </div>
