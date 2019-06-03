@@ -21,19 +21,25 @@
                         </div>
                     </div>
                     <div class="form-group clearfix">
-                        <label for="{{ form.email.id_for_label }}" class="col-md-4 control-label text-right">نام خانوادگی</label>
+                        <label for="{{ form.last_name.id_for_label }}" class="col-md-4 control-label text-right">نام خانوادگی</label>
                         <div class="col-md-6">
                             {{ form.last_name }}
                         </div>
                     </div>
                     <div class="form-group clearfix">
-                        <label for="{{ form.password.id_for_label }}" class="col-md-4 control-label text-right">شماره دانشجویی</label>
+                        <label for="{{ form.student_number.id_for_label }}" class="col-md-4 control-label text-right">شماره دانشجویی</label>
                         <div class="col-md-6">
                             {{ form.student_number }}
                         </div>
                     </div>
                     <div class="form-group clearfix">
-                        <label for="{{ form.password_repeat.id_for_label }}" class="col-md-4 control-label text-right">شماره تلفن</label>
+                        <label for="{{ form.national_id.id_for_label }}" class="col-md-4 control-label text-right">کد ملی</label>
+                        <div class="col-md-6">
+                            {{ form.national_id }}
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <label for="{{ form.phone_number.id_for_label }}" class="col-md-4 control-label text-right">شماره تلفن</label>
                         <div class="col-md-6">
                             {{ form.phone_number }}
                         </div>

@@ -10,8 +10,10 @@ class RegisterForm(forms.Form):
     last_name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
     phone_number = forms.CharField(widget=forms.NumberInput(attrs={'class':'form-control'}))
     student_number = forms.CharField(widget=forms.NumberInput(attrs={'class':'form-control'}))
+    national_id = forms.CharField(widget=forms.NumberInput(attrs={'class':'form-control'}))
     #entry_year = forms.IntegerField(widget=forms.NumberInput(attrs={'class':'form-control'}))
     can_presure = forms.BooleanField(widget=forms.CheckboxInput(attrs={'class':'form-control'}), required=0, )
+
 
     '''
     user
