@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    {% for sec_list in section_detail %}
+    {% for section in sec_list %}
+    <table class="table">
+      <tbody>
+        <tr>
+          <td>{{ section.show }}</td>
+        </tr>
+        <tr>
+          {% for usr in section.usr_set.all %}
+          <td>{{ usr.polluser.show_name }}</td>
+          <td>{{ usr.polluser.f_student_number }}</td>
+          <td>{{ usr.polluser.f_national_id }}</td>
+          {% endfor %}
+        </tr>
+      </tbody>
+    </table>
+    {% endfor %}
+    {% endfor %}
+  </body>
+</html>

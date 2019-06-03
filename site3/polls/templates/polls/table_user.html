@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <table class="table">
+      <tbody>
+        <tr>
+          <th>نام</th>
+          <th>تعداد شیفت</th>
+          <th>ورودی</th>
+          <th>توانایی فشار خون گرفتن</th>
+        </tr>
+        {% for polluser in pollusers %}
+        {% if polluser.usr_set.count %}
+        <tr>
+          <td>{{ polluser.show_name }}</td>
+          <td>{{ polluser.f_national_id }}</td>
+          <td>{{ polluser.f_student_number }}</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

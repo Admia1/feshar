@@ -13,6 +13,8 @@ urlpatterns = [
     url('gp/', views.gp_student_view, name='gp'),
     url('cant/', views.cant_view, name='cant'),
     url('get_national_id/', views.get_national_id_view, name='get_national_id'),
+    url('table_shift/', views.table_shift_view, name='print1'),
+    url('table_user/', views.table_user_view , name='print2'),
 
 
     #url('take/', views.take_view ,name='take'),

@@ -207,3 +207,20 @@ def get_national_id_view(request):
             form = NationalIdForm()
         return render(request, template, {'form': form})
     return HttpResponseRedirect(reverse('polls:register'))
+
+
+def table_user_view(request):
+    if request.user.is_staff:
+        template = 'polls/table_user.html'
+        pollusers = PollUser.objects.order_by('entry_year')
+        return render(request, template, {'pollusers':pollusers})
+    else:
+        return HttpResponseRedirect(reverse('polls:home'))
+
+def table_shift_view(request):
+    if request.user.is_staff:
+        template = 'polls/table_shift.html'
+        section_detail = [[section for section in day.section_set.order_by('index', 'station')] for day in EventDay.objects.all().order_by('day')]
+        return render(request, template, {'section_detail' : section_detail})
+    else:
+        return HttpResponseRedirect(reverse('polls:home'))
