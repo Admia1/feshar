@@ -8,7 +8,7 @@
       border-collapse: collapse;
     }
 
-    table, td, th {
+    table, td {
       border: 1px solid black;
     }
     </style>
@@ -19,7 +19,7 @@
     {% for sec_list in section_detail %}
     {% for section in sec_list %}
         <tr>
-          <td>{{ section.show }}</td>
+          <th>{{ section.show }}</th>
         </tr>
           {% for usr in section.usr_set.all %}
           <tr>
@@ -29,9 +29,6 @@
             <td>{{ usr.polluser.f_national_id }}</td>
           </tr>
           {% endfor %}
-          <tr>
-            <td></td>
-          </tr>
     {% endfor %}
     {% endfor %}
   </table>
