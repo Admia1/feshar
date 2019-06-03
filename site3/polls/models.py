@@ -58,7 +58,7 @@ class PollUser(models.Model):
     entry_year = models.IntegerField()
     can_presure = models.BooleanField(default=0)
     sex = models.IntegerField(default=1)
-    national_code = IntegerField(default=0)
+    national_id = models.IntegerField(default=0)
 
     def show_year(self):
         return entry_year_show(self.entry_year)
