@@ -198,6 +198,7 @@ def get_national_id_view(request):
             if form.is_valid():
                 polluser = PollUser.objects.get(user=request.user)
                 polluser.national_id = form.cleaned_data['national_id']
+                polluser.save()
                 return HttpResponseRedirect(reverse('polls:home'))
         else:
             form = RegisterForm()
