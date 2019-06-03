@@ -53,7 +53,7 @@ class PollUser(models.Model):
     user = models.ForeignKey(User ,on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100, default="FIRST_NAME")
     last_name = models.CharField(max_length=100, default="LAST_NAME")
-    national_id = models.CharField(max_length=20,default="code_meli")
+    national_id = models.CharField(max_length=20,default="0")
     student_number = models.CharField(max_length=20, default="1234")
     phone_number  = models.CharField(max_length=20, default="0917")
     entry_year = models.IntegerField()
