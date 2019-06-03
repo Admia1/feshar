@@ -14,10 +14,10 @@
     </style>
   </head>
   <body>
+    <tbody>
+      <table class="table">
     {% for sec_list in section_detail %}
     {% for section in sec_list %}
-    <table class="table">
-      <tbody>
         <tr>
           <td>{{ section.show }}</td>
         </tr>
@@ -32,9 +32,9 @@
           <tr>
             <td></td>
           </tr>
-      </tbody>
-    </table>
     {% endfor %}
     {% endfor %}
+  </table>
+</tbody>
   </body>
 </html>
