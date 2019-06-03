@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
-from .forms import RegisterForm, LoginForm
+from .forms import RegisterForm, LoginForm, NationalIdForm
 from django.contrib.auth import  login, logout
 from .models import PollUser,Section,EventDay,USR,entry_year_show
 from django.urls import reverse
@@ -185,3 +185,21 @@ def cant_view(request):
         return render(request, template, {'pollusers':pollusers})
     else:
         return HttpResponseRedirect(reverse('polls:home'))
+
+
+
+
+def get_national_id_view(request):
+    # if this is a POST request we need to process the form data
+    template = 'polls/get_national_id.html'
+    if(request.user.is_authenticated):
+        if request.method == 'POST':
+            form = RegisterForm(request.POST)
+            if form.is_valid():
+                polluser = PollUser.objects.get(user=request.user)
+                polluser.national_id = form.cleaned_data['national_id']
+                return HttpResponseRedirect(reverse('polls:home'))
+        else:
+            form = RegisterForm()
+        return render(request, template, {'form': form})
+    return HttpResponseRedirect(reverse('polls:register'))

@@ -12,6 +12,7 @@ urlpatterns = [
     url('ngp/', views.ngp_student_view, name='ngp'),
     url('gp/', views.gp_student_view, name='gp'),
     url('cant/', views.cant_view, name='cant'),
+    url('get_national_id/', views.get_national_id_view, name='get_national_id'),
 
 
     #url('take/', views.take_view ,name='take'),
