@@ -93,9 +93,12 @@ def login_view(request):
 def home_view(request):
     template = 'polls/home.html'
     if request.user.is_authenticated :
+        polluser = PollUser.objects.get(user=request.user)
+        if(polluser.national_id == "0"):#when user got no national_id
+            return HttpResponseRedirect(reverse('polls:get_national_id'))
         error_message = ""
+
         if request.method == 'POST':
-            polluser = PollUser.objects.get(user=request.user)
             section = Section.objects.get(pk=request.POST['section_pk'])
 
             usrs = section.usr_set.all()
