@@ -104,8 +104,8 @@ class Section(models.Model):
     index = models.IntegerField(default=1)
     station = models.IntegerField(default=1)
 
-    def show(self):
 
+    def detail_show(self):
         if self.station ==1 :
             ret = "ایسنگاه اول "
         if self.station ==2 :
@@ -121,8 +121,13 @@ class Section(models.Model):
             ret+= " شیفت سوم ساعت ۱۴ الی ۱۷"
         if(self.index==4):
             ret+= " شیفت چهارم ساعت ۱۷ الی ۲۰"
-        ret = self.eventday.show() + ret
+
         return ret
+
+
+    def show(self):
+
+        return self.eventday.show() + self.detail_show()
 
     def is_full(self):
         return self.usr_set.count() >= 3

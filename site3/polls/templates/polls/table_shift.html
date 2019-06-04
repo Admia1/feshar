@@ -19,7 +19,8 @@
         {% for sec_list in section_detail %}
         {% for section in sec_list %}
             <tr>
-              <th>{{ section.show }}</th>
+              <th>{{ section.detail_show }}</th>
+              <th>{{ section.eventday.show }}</th>
             </tr>
               {% for usr in section.usr_set.all %}
               <tr>
@@ -28,7 +29,7 @@
                 <td></td>
                 <td>{{ usr.polluser.f_national_id }}</td>
               </tr>
-        {% endfor %}      
+              {% endfor %}
         {% endfor %}
         {% endfor %}
       </table>
