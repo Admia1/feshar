@@ -99,6 +99,9 @@ class EventDay(models.Model):
         else:
             return farsi(self.day-100)+" تیر "
 
+    def __str__(self):
+        return self.show()
+
 class Section(models.Model):
     eventday = models.ForeignKey(EventDay, on_delete=models.CASCADE)
     index = models.IntegerField(default=1)
@@ -126,8 +129,10 @@ class Section(models.Model):
 
 
     def show(self):
-
         return self.eventday.show() + self.detail_show()
+
+    def __str__(self):
+        return self.show()
 
     def is_full(self):
         return self.usr_set.count() >= 3
