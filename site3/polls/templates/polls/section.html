@@ -13,9 +13,9 @@
           <form action="{% url 'polls:home' %}" method="post">
             {% csrf_token %}
             {% if usr.is_present %}
-            <input type="submit" value="حاضر" class="btn btn-danger btn-xs" name="iii">
+            <input type="submit" value="حاضر" class="btn btn-success btn-xs" name="iii">
             {% else %}
-            <input type="submit" value="غائب" class="btn            btn-xs" name="iii">
+            <input type="submit" value="غائب" class="btn btn-danger  btn-xs" name="iii">
             {% endif %}
             <a href="{% url 'polls:userinfo' usr.polluser.pk %}">{{ usr.polluser.show_name }}</a>
           </form>
