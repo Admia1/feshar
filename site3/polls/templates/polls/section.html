@@ -7,17 +7,19 @@
   <div class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">
       <div class="panel-heading" {% if section.anti_tatbiq %}style="color:red"{% endif %}>{{ section.show }}</div>
-        <div class="panel-body">
-          <div class="col-md-6 col-md-offset-0">
-            <table class="table">
-              <tbody>
-                <tr>
-                  {% for usr in section.usr_set.all %}
-                  <td><a href="{% url 'polls:userinfo' usr.polluser.pk %}">{{ usr.polluser.show_name }}</a></td>
-                  {% endfor %}
-                </tr>
-              </tbody>
-            </table>
+      <div class="panel-body">
+        <div class="col-md-6 col-md-offset-0">
+          {% for usr in section.usr_set.all %}
+          <form action="{% url 'polls:home' %}" method="post">
+            {% csrf_token %}
+            {% if usr.is_present %}
+            <input type="submit" value="حاضر" class="btn btn-danger btn-xs" name="iii">
+            {% else %}
+            <input type="submit" value="غائب" class="btn            btn-xs" name="iii">
+            {% endif %}
+            <a href="{% url 'polls:userinfo' usr.polluser.pk %}">{{ usr.polluser.show_name }}</a>
+          </form>
+          {% endfor %}
         </div>
       </div>
     </div>
