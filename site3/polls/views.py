@@ -237,3 +237,16 @@ def section_view(request ,section_pk):
             return render(request, template, {'error_message': "همچین شیفتی وجود ندارد"})
     else:
         return HttpResponseRedirect(reverse('polls:home'))
+
+def change_present_view(request, usr_pk, new_state):
+    if request.user.is_staff:
+        try:
+            usr = USR.objects.get(pk=usr_pk)
+            usr.is_present = new_state
+            usr.save()
+            return HttpResponseRedirect(reverse('polls:section section_pk', kwargs={'section_pk' : usr.section.pk}))
+        except:
+            template = 'polls/section.html'
+            return render(request, template, {'error_message': "همچین"})
+    else:
+        return HttpResponseRedirect(reverse('polls:home'))

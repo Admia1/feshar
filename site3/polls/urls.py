@@ -21,6 +21,8 @@ urlpatterns = [
     path('delete/<int:usr_pk>/', views.delete_view ,name='delete'),
     path('info/<int:polluser_pk>/', views.info_user_view, name='userinfo'),
     path('section/<int:section_pk>/', views.section_view, name='section'),
+
+    path('chang_usr_present/<int:usr_pk>/<int:new_state>/', views.change_present_view, name='chang_usr_present'),
     url('info/', views.info_view, name='info'),
     url('', views.register_view, name='base'),
 ]
