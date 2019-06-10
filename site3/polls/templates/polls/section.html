@@ -8,7 +8,7 @@
     <div class="panel panel-default">
       <div class="panel-heading" {% if section.anti_tatbiq %}style="color:red"{% endif %}>{{ section.show }}</div>
       <div class="panel-body">
-        <div class="col-md-6 col-md-offset-0">
+        <div class="col-md-12 col-md-offset-0">
           {% for usr in section.usr_set.all %}
             {% if usr.is_present %}
             <form action="{% url 'polls:chang_usr_present' usr.pk 0 %}" method="post">

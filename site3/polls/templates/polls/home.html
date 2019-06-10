@@ -9,7 +9,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">تایم های رزرو شده توسط شما</div>
         <div class="panel-body">
-          <div class="col-md-6 col-md-offset-0">
+          <div class="col-md-12 col-md-offset-0">
           {% for usr in usr_detail %}
           <form action="{% url 'polls:delete' usr.pk %}" method="post">
             {% csrf_token %}
