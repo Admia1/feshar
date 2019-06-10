@@ -157,9 +157,9 @@ def user_view(request ,polluser_pk):
     else:
         return HttpResponseRedirect(reverse('polls:home'))
 
-def allusers_view(request):
+def users_view(request):
     if request.user.is_staff:
-        template = 'polls/allusers.html'
+        template = 'polls/users.html'
         pollusers = PollUser.objects.order_by('entry_year')
         return render(request, template, {'pollusers':pollusers})
     else:
