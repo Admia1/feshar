@@ -246,6 +246,7 @@ def change_present_view(request, usr_pk, new_state):
             usr.save()
             return HttpResponseRedirect(reverse('polls:section section_pk', kwargs={'section_pk' : usr.section.pk}))
         except:
+            raise
             template = 'polls/section.html'
             return render(request, template, {'error_message': "همچین"})
     else:
