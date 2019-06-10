@@ -19,7 +19,7 @@ urlpatterns = [
 
     #url('take/', views.take_view ,name='take'),
     path('delete/<int:usr_pk>/', views.delete_view ,name='delete'),
-    path('info/<int:polluser_pk>/', views.info_user_view, name='userinfo'),
+    path('user/<int:polluser_pk>/', views.user_view, name='user'),
     path('section/<int:section_pk>/', views.section_view, name='section'),
 
     path('chang_usr_present/<int:usr_pk>/<int:new_state>/', views.change_present_view, name='chang_usr_present'),

@@ -15,7 +15,7 @@
               <tbody>
                 <tr>
                   {% for usr in section.usr_set.all %}
-                  <td><a href="{% url 'polls:userinfo' usr.polluser.pk %}">{{ usr.polluser.show_name }}</a></td>
+                  <td><a href="{% url 'polls:user' usr.polluser.pk %}">{{ usr.polluser.show_name }}</a></td>
                   {% endfor %}
                 </tr>
               </tbody>

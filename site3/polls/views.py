@@ -146,9 +146,9 @@ def sections_view(request):
     else:
         return HttpResponseRedirect(reverse('polls:home'))
 
-def info_user_view(request ,polluser_pk):
+def user_view(request ,polluser_pk):
     if request.user.is_staff:
-        template = 'polls/userinfo.html'
+        template = 'polls/user.html'
         try:
             polluser = PollUser.objects.get(pk = polluser_pk)
             return render(request, template, {'polluser' : polluser})
