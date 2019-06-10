@@ -11,7 +11,7 @@
           {% if error_message %}
             <p class="bg-danger p-d ml-b">{{ error_message }}</p>
           {% endif %}
-          <div class="col-md-6 col-md-offset-0">
+          <div class="col-md-12 col-md-offset-0">
             <table class="table table-striped">
               <tbody>
                 <tr>
@@ -54,10 +54,10 @@
     <div class="panel panel-default">
       <div class="panel-heading">شیفت های رزرو شده</div>
         <div class="panel-body">
-          <div class="col-md-6 col-md-offset-0">
+          <div class="col-md-12 col-md-offset-0">
             <ul>
               {% for usr in polluser.usr_set.all %}
-                <li>{{ usr.section.show }}</li>
+                <li><a href="{% url 'polls:section' usr.section.pk %}">{{ usr.section.show }}</a></li>
               {% endfor %}
             </ul>
         </div>
