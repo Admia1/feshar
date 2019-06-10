@@ -10,7 +10,6 @@
       <div class="panel-body">
         <div class="col-md-6 col-md-offset-0">
           {% for usr in section.usr_set.all %}
-            {% csrf_token %}
             {% if usr.is_present %}
             <form action="{% url 'polls:chang_usr_present' usr.pk 0 %}" method="post">
             <input type="submit" value="حاضر" class="btn btn-success btn-xs" name="iii">
@@ -18,6 +17,7 @@
             <form action="{% url 'polls:chang_usr_present' usr.pk 1 %}" method="post">
             <input type="submit" value="غائب" class="btn btn-danger  btn-xs" name="iii">
             {% endif %}
+            {% csrf_token %}
             <a href="{% url 'polls:userinfo' usr.polluser.pk %}">{{ usr.polluser.show_name }}</a>
           </form>
           {% endfor %}
