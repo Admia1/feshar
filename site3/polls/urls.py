@@ -20,6 +20,7 @@ urlpatterns = [
     #url('take/', views.take_view ,name='take'),
     path('delete/<int:usr_pk>/', views.delete_view ,name='delete'),
     path('info/<int:polluser_pk>/', views.info_user_view, name='userinfo'),
+    path('section/<int:section_pk>/', views.section_view, name='section'),
     url('info/', views.info_view, name='info'),
     url('', views.register_view, name='base'),
 ]

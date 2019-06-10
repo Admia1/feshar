@@ -1,0 +1,26 @@
+{% extends "polls/base.html" %}
+{% block data %}
+<a href="{% url 'polls:logout' %}"class="logout-submit">خروج</a>
+{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading" {% if section.anti_tatbiq %}style="color:red"{% endif %}>{{ section.show }}</div>
+        <div class="panel-body">
+          <div class="col-md-6 col-md-offset-0">
+            <table class="table">
+              <tbody>
+                <tr>
+                  {% for usr in section.usr_set.all %}
+                  <td><a href="{% url 'polls:userinfo' usr.polluser.pk %}">{{ usr.polluser.show_name }}</a></td>
+                  {% endfor %}
+                </tr>
+              </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -224,3 +224,21 @@ def table_shift_view(request):
         return render(request, template, {'section_detail' : section_detail})
     else:
         return HttpResponseRedirect(reverse('polls:home'))
+
+def section_veiw():
+    if request.user.is_staff:
+        template = 'polls/.html'
+    else
+        return HttpResponseRedirect(reverse('polls:register'))
+
+def section_view(request ,section_pk):
+    if request.user.is_staff:
+        template = 'polls/section.html'
+        try:
+            section = Section.objects.get(pk=section_pk)
+            usrs = USR.objects.filter(section=section)
+            return render(request, template, {'section' : section, 'usrs' : usrs})
+        except:
+            return render(request, template, {'error_message': "همچین شیفتی وجود ندارد"})
+    else:
+        return HttpResponseRedirect(reverse('polls:home'))
