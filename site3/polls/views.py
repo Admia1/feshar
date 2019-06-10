@@ -225,11 +225,6 @@ def table_shift_view(request):
     else:
         return HttpResponseRedirect(reverse('polls:home'))
 
-def section_veiw():
-    if request.user.is_staff:
-        template = 'polls/.html'
-    else
-        return HttpResponseRedirect(reverse('polls:register'))
 
 def section_view(request ,section_pk):
     if request.user.is_staff:
