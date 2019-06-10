@@ -244,7 +244,7 @@ def change_present_view(request, usr_pk, new_state):
             usr = USR.objects.get(pk=usr_pk)
             usr.is_present = new_state
             usr.save()
-            return HttpResponseRedirect(reverse('polls:section-section_pk', kwargs={'section_pk' : usr.section.pk}))
+            return HttpResponseRedirect(reverse('polls:section', 'section_pk'=usr.section.pk))
         except:
             raise
             template = 'polls/section.html'
