@@ -138,9 +138,9 @@ def delete_view(request, usr_pk):
         return HttpResponseRedirect(reverse('polls:register'))
 
 
-def info_view(request):
+def sections_view(request):
     if request.user.is_staff:
-        template = 'polls/info.html'
+        template = 'polls/sections.html'
         section_detail = [[section for section in day.section_set.order_by('index', 'station')] for day in EventDay.objects.all().order_by('day')]
         return render(request, template, {'section_detail' : section_detail})
     else:
