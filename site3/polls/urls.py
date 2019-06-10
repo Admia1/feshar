@@ -23,6 +23,6 @@ urlpatterns = [
     path('section/<int:section_pk>/', views.section_view, name='section'),
 
     path('chang_usr_present/<int:usr_pk>/<int:new_state>/', views.change_present_view, name='chang_usr_present'),
-    url('info/', views.sections_view, name='info'),
+    url('sections/', views.sections_view, name='sections'),
     url('', views.register_view, name='base'),
 ]
