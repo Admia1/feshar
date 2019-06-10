@@ -156,3 +156,4 @@ class Section(models.Model):
 class USR(models.Model):
     polluser = models.ForeignKey(PollUser ,on_delete=models.CASCADE)
     section = models.ForeignKey(Section ,on_delete=models.CASCADE)
+    is_present = models.BooleanField(default = False)
