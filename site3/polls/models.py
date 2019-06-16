@@ -163,3 +163,7 @@ class USR(models.Model):
             return "حاضر"
         else:
             return "غائب"
+
+class Config(models.Model):
+    first_deleteable_day = models.IntegerField(default=0 )
+    site_online = models.IntegerField(default=0 )

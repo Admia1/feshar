@@ -127,7 +127,7 @@ def delete_view(request, usr_pk):
             usr = USR.objects.get(pk=usr_pk)
             try:
                 if usr.polluser.user == request.user:
-                    if usr.section.eventday.day > 99:
+                    if usr.section.eventday.day >= Config.objects.all().first().first_deleteable_day:
                         usr.delete()
                 return HttpResponseRedirect(reverse('polls:home'))
             except:
