@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 from .forms import RegisterForm, LoginForm, NationalIdForm
 from django.contrib.auth import  login, logout
-from .models import PollUser,Section,EventDay,USR,entry_year_show
+from .models import PollUser,Section,EventDay,USR,entry_year_show, Config
 from django.urls import reverse
 
 def register_view(request):
@@ -96,6 +96,7 @@ def home_view(request):
         polluser = PollUser.objects.get(user=request.user)
         if(polluser.national_id == "0"):#when user got no national_id
             return HttpResponseRedirect(reverse('polls:get_national_id'))
+
         error_message = ""
 
         if request.method == 'POST':
@@ -110,12 +111,16 @@ def home_view(request):
                 if USR.objects.filter(section__eventday=section.eventday, section__index=section.index, polluser=polluser).exists():
                     error_message = "شما قبلا در این روز و تاریخ شیفتی رزرو کرده اید"
                 else:
-                    USR.objects.create(polluser=polluser, section=section)
-                    error_message = "رزرو شد"
+                    if Config.objects.first().site_online == 1:
+                        USR.objects.create(polluser=polluser, section=section)
+                        error_message = "رزرو شد"
+                    else:
+                        error_message = "هم اکنون امکان رزرو شیفت وجود ندارد"
 
         section_detail = [[section for section in day.section_set.order_by('index', 'station') if section.usr_set.count()<3] for day in EventDay.objects.all().order_by('day')]
         usr_detail = [usr for usr in USR.objects.filter(polluser__user=request.user)]
-        return render(request, template, {'section_detail': section_detail, 'error_message': error_message, 'usr_detail': usr_detail})
+        config  = Config.objects.first()
+        return render(request, template, {'section_detail': section_detail, 'error_message': error_message, 'usr_detail': usr_detail, 'config': config})
     else:
         return HttpResponseRedirect(reverse('polls:register'))
 
@@ -127,7 +132,7 @@ def delete_view(request, usr_pk):
             usr = USR.objects.get(pk=usr_pk)
             try:
                 if usr.polluser.user == request.user:
-                    if usr.section.eventday.day >= Config.objects.all().first().first_deleteable_day:
+                    if usr.section.eventday.day >= Config.objects.first().first_deleteable_day:
                         usr.delete()
                 return HttpResponseRedirect(reverse('polls:home'))
             except:
