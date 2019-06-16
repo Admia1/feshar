@@ -11,13 +11,14 @@
       <div class="panel-heading">تنطیمات سایت</div>
         <div class="panel-body">
           <div class="col-md-12 col-md-offset-0">
+            <label>وضعیت سایت</label>
             {% if config.site_online%}
-            <form action="{% url 'polls:home' %}" method="post">
+            <form action="{% url 'polls:site_status' 0 %}" method="post">
               {% csrf_token %}
               <input type="submit" value="فعال" class="btn btn-success btn-xs" >
             </form>
             {% else %}
-            <form action="{% url 'polls:home' %}" method="post">
+            <form action="{% url 'polls:site_status' 1 %}" method="post">
               {% csrf_token %}
               <input type="submit" value="غیر فعال" class="btn btn-danger btn-xs" >
             </form>

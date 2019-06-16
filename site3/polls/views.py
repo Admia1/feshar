@@ -257,3 +257,10 @@ def change_present_view(request, usr_pk, new_state):
             return render(request, template, {'error_message': "همچین"})
     else:
         return HttpResponseRedirect(reverse('polls:home'))
+
+def status_view(request, new_state):
+    if request.user.is_superuser:
+        c = Config.objects.first()
+        c.site_online = new_state
+        c.save()
+    return HttpResponseRedirect(reverse('polls:home'))

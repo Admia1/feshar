@@ -22,7 +22,10 @@ urlpatterns = [
     path('user/<int:polluser_pk>/', views.user_view, name='user'),
     path('section/<int:section_pk>/', views.section_view, name='section'),
 
-    path('chang_usr_present/<int:usr_pk>/<int:new_state>/', views.change_present_view, name='chang_usr_present'),
+    path('change_usr_present/<int:usr_pk>/<int:new_state>/', views.change_present_view, name='change_usr_present'),
     path('sections/', views.sections_view, name='sections'),
+
+    path('config/site_status/<int:new_state>/', views.site_status_view ,name='site_status'),
+
     path('', views.register_view, name='base'),
 ]
