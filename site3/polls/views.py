@@ -258,7 +258,7 @@ def change_present_view(request, usr_pk, new_state):
     else:
         return HttpResponseRedirect(reverse('polls:home'))
 
-def status_view(request, new_state):
+def site_status_view(request, new_state):
     if request.user.is_superuser:
         c = Config.objects.first()
         c.site_online = new_state
