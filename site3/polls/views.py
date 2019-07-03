@@ -105,8 +105,8 @@ def home_view(request):
             usrs = section.usr_set.all()
             if len(usrs) >= 3:
                 error_message = "این شیفت در این تاریخ و ایستگاه پر شده است"
-            elif len(usrs)==2 and usrs[0].polluser.sex==usrs[1].polluser.sex==polluser.sex:
-                error_message = "با توجه به طرح تطبیق امکان حضور سه پسر یا سه دختر در یک ایستگاه وجود ندارد!!!"
+            elif len(usrs)==2 and usrs[0].polluser.sex==usrs[1].polluser.sex==polluser.sex==0:
+                error_message = "ا توجه به طرح تطبیق امکان حضور سه پسر در یک ایستگاه وجود ندارد!!!"
             else:
                 if USR.objects.filter(section__eventday=section.eventday, section__index=section.index, polluser=polluser).exists():
                     error_message = "شما قبلا در این روز و تاریخ شیفتی رزرو کرده اید"
