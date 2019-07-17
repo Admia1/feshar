@@ -26,7 +26,7 @@
             </tr>
               {% for usr in section.usr_set.all %}
               <tr>
-                <td>{{ usr.polluser.show_name }}<p style="color:{{ usr.ip_color }} ">{{ip_show}}</p></td>
+                <td>{{ usr.polluser.show_name }}<p style="color:{{ usr.ip_color }} ">{{usr.ip_show}}</p></td>
                 <td>{{ usr.polluser.f_student_number }}</td>
                 <td>{{ usr.polluser.f_national_id }}</td>
               </tr>
