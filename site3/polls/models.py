@@ -91,9 +91,13 @@ class PollUser(models.Model):
 
     def present_time(self):
         return 3 * self.usr_set.filter(is_present = True).count()
+    def f_present_time(self):
+        return farsi(self.present_time())
 
     def reserved_time(self):
         return 3 * self.usr_set.count()
+    def f_reserved_time(self):
+        return farsi(self.reserved_time())
 
 class EventDay(models.Model):
     day = models.IntegerField()

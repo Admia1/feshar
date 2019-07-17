@@ -20,8 +20,8 @@
       <thead>
         <tr>
           <th>نام</th>
-          <th>ساعات رزرو</th>
           <th>ساعات حضور</th>
+          <th>ساعات رزرو</th>
           <th>کد ملی</th>
           <th>شماره دانشجویی</th>
         </tr>
@@ -31,8 +31,8 @@
         {% if polluser.usr_set.count %}
         <tr>
           <td>{{ polluser.show_name }}</td>
-          <td>{{ polluser.reserved_time }}</td>
           <td>{{ polluser.present_time }}</td>
+          <td>{{ polluser.reserved_time }}</td>
           <td>{{ polluser.f_national_id }}</td>
           <td>{{ polluser.f_student_number }}</td>
         </tr>
