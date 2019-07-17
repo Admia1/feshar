@@ -164,6 +164,13 @@ class USR(models.Model):
         else:
             return "غائب"
 
+    def ip_color(self):
+        if self.is_present:
+            return 'green'
+        else:
+            return 'red'
+
+
 class Config(models.Model):
     first_deleteable_day = models.IntegerField(default=0 )
     site_online = models.IntegerField(default=0 )
