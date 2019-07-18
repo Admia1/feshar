@@ -28,10 +28,10 @@
       </thead>
         <tbody>
         {% for polluser in pollusers %}
-        {% if polluser.usr_set.count %}
+        {% if polluser.total_time %}
         <tr>
           <td>{{ polluser.show_name }}</td>
-          <td>{{ polluser.f_present_time }}</td>
+          <td>{{ polluser.f_total_time }}</td>
           <td>{{ polluser.f_reserved_time }}</td>
           <td>{{ polluser.f_national_id }}</td>
           <td>{{ polluser.f_student_number }}</td>
