@@ -272,12 +272,10 @@ def site_status_view(request, new_state):
         c.save()
     return HttpResponseRedirect(reverse('polls:home'))
 
-def delete_extra_work(request, extra_work_pk):
+def delete_extra_work(request, extra_work_pk, polluser_pk):
     if request.user.is_staff:
         try :
             ew = ExtraWork.objects.get(pk = extra_work_pk)
-            polluser_pk = ew.polluser.pk
             ew.delete()
-        return HttpResponseRedirect(reverse('polls:user' ,kwargs={'polluser_pk' : polluser_pk}))
-
+            return HttpResponseRedirect(reverse('polls:user' ,kwargs={'polluser_pk' : polluser_pk}))
     return HttpResponseRedirect(reverse('polls:home'))
