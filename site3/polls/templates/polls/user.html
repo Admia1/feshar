@@ -107,7 +107,11 @@
           <div class="col-md-12 col-md-offset-0">
             <ul>
               {% for ew in polluser.extrawork_set.all %}
-                <li><p>اطلاعات: {{ ew.info }}</p><p>ساعت: {{ ew.f_hour }}</p></li>
+                <li><form class="" action="{% url 'polls:delete_extra_work' ew.pk polluser.pk %}" method="post">
+                  <div>
+                      <input type="submit" value="X" class="btn btn-alert">
+                  </div>
+                </form><p>اطلاعات: {{ ew.info }}</p><p>ساعت: {{ ew.f_hour }}</p></li>
               {% endfor %}
             </ul>
         </div>
