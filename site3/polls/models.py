@@ -183,3 +183,8 @@ class USR(models.Model):
 class Config(models.Model):
     first_deleteable_day = models.IntegerField(default=0 )
     site_online = models.IntegerField(default=0 )
+
+class ExtraWork(models.Model):
+    polluser = models.ForeignKey(PollUser, on_delete=models.CASCADE)
+    info = models.CharField(default="اضافه کاری", max_length = 100)
+    hour = models.IntegerField(default=0)
