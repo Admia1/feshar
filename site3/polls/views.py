@@ -278,4 +278,6 @@ def delete_extra_work(request, extra_work_pk, polluser_pk):
             ew = ExtraWork.objects.get(pk = extra_work_pk)
             ew.delete()
             return HttpResponseRedirect(reverse('polls:user' ,kwargs={'polluser_pk' : polluser_pk}))
+        except:
+            return HttpResponseRedirect(reverse('polls:user' ,kwargs={'polluser_pk' : polluser_pk}))
     return HttpResponseRedirect(reverse('polls:home'))
