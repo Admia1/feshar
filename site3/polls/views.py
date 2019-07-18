@@ -1,9 +1,9 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
-from .forms import RegisterForm, LoginForm, NationalIdForm
+from .forms import RegisterForm, LoginForm, NationalIdForm, ExtraWorkForm
 from django.contrib.auth import  login, logout
-from .models import PollUser,Section,EventDay,USR,entry_year_show, Config
+from .models import PollUser,Section,EventDay,USR,entry_year_show, Config, ExtraWork
 from django.urls import reverse
 
 def register_view(request):
@@ -157,7 +157,14 @@ def user_view(request ,polluser_pk):
         template = 'polls/user.html'
         try:
             polluser = PollUser.objects.get(pk = polluser_pk)
-            return render(request, template, {'polluser' : polluser})
+            if request.method == 'POST':
+                form = ExtraWorkForm(request.POST)
+                if form.is_valid():
+                    ew = ExtraWork(polluser=polluser, hour=form.cleaned_data['hour'] ,info=form.cleaned_data['info'])
+                    ew.save()
+
+            form = ExtraWorkForm()
+            return render(request, template, {'polluser' : polluser, 'form' : form})
         except:
             return render(request, template, {'error_message': "همچین کاربری وجود ندارد"})
     else:

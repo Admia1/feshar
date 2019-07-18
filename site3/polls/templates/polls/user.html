@@ -50,6 +50,39 @@
   </div>
 </div>
 <div class="container">
+  <form action="{% url 'polls:user' %}" method="post">
+    {% csrf_token %}
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">فرم اضافه کردن اضافه کاری</div>
+        <div class="panel-body">
+          <div class="col-md-12 col-md-offset-0">
+            <div class="form-group clearfix">
+              <label class="col-md-4 control-label text-right">ساعت</label>
+              <div class="col-md-6">
+                  {{ form.hour }}
+              </div>
+            </div>
+
+            <div class="form-group clearfix">
+              <label class="col-md-4 control-label text-right">اطلاعات تا ۱۰۰ کاراکتر</label>
+              <div class="col-md-6">
+                  {{ form.info }}
+              </div>
+            </div>
+
+            <div class="col-md-6 col-md-offset-4">
+                <input type="submit" value="ثبت" class="btn btn-success">
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="container">
   <div class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">
       <div class="panel-heading">شیفت های رزرو شده</div>
@@ -58,6 +91,23 @@
             <ul>
               {% for usr in polluser.usr_set.all %}
                 <li><a href="{% url 'polls:section' usr.section.pk %}">{{ usr.section.show }}</a></li>
+              {% endfor %}
+            </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">اضافه کاری ها</div>
+        <div class="panel-body">
+          <div class="col-md-12 col-md-offset-0">
+            <ul>
+              {% for ew in polluser.extrawork_set.all %}
+                <li><p>اطلاعات: {% ew.info %}</p><p>ساعت: {% ew.f_hour %}</p></li>
               {% endfor %}
             </ul>
         </div>

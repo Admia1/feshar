@@ -188,3 +188,6 @@ class ExtraWork(models.Model):
     polluser = models.ForeignKey(PollUser, on_delete=models.CASCADE)
     info = models.CharField(default="اضافه کاری", max_length = 100)
     hour = models.IntegerField(default=0)
+
+    def f_hour(self):
+        return farsi(self.hour)
