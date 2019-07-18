@@ -109,7 +109,7 @@
               {% for ew in polluser.extrawork_set.all %}
                 <li><form class="" action="{% url 'polls:delete_extra_work' ew.pk polluser.pk %}" method="post">
                   <div>
-                      <input type="submit" value="X" class="btn btn-alert">
+                      <input type="submit" value="X" class="btn btn-danger">
                   </div>
                 </form><p>اطلاعات: {{ ew.info }}</p><p>ساعت: {{ ew.f_hour }}</p></li>
               {% endfor %}
