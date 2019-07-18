@@ -29,7 +29,7 @@
         <tbody>
         {% for polluser in pollusers %}
         <tr>
-          <td>{{ polluser.show_name }}</td>
+          <td><a href="{% url 'polls:user' polluser.pk %}" style="color:black">{{ polluser.show_name }}</a></td>
           <td>{{ polluser.f_total_time }}</td>
           <td>{{ polluser.f_reserved_time }}</td>
           <td>{{ polluser.f_student_number }}</td>
