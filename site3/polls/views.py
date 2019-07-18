@@ -162,7 +162,7 @@ def user_view(request ,polluser_pk):
                 if form.is_valid():
                     ew = ExtraWork(polluser=polluser, hour=form.cleaned_data['hour'] ,info=form.cleaned_data['info'])
                     ew.save()
-
+                    return HttpResponseRedirect(reverse('polls:user',  kwargs={'polluser_pk' : polluser.pk}))
             form = ExtraWorkForm()
             return render(request, template, {'polluser' : polluser, 'form' : form})
         except:
@@ -270,4 +270,14 @@ def site_status_view(request, new_state):
         c = Config.objects.first()
         c.site_online = new_state
         c.save()
+    return HttpResponseRedirect(reverse('polls:home'))
+
+def delete_extra_work(request, extra_work_pk):
+    if request.user.is_staff:
+        try :
+            ew = ExtraWork.objects.filter(pk = extra_work_pk)
+            polluser_pk = ew.polluser.pk
+            ew.delete()
+            return HttpResponseRedirect(reverse('polls:user' ,kwargs={'polluser_pk' : polluser_pk}))
+
     return HttpResponseRedirect(reverse('polls:home'))
