@@ -108,6 +108,7 @@
             <ul>
               {% for ew in polluser.extrawork_set.all %}
                 <li><form class="" action="{% url 'polls:delete_extra_work' ew.pk polluser.pk %}" method="post">
+                  {% csrf_token %}
                   <div>
                       <input type="submit" value="X" class="btn btn-danger">
                   </div>
