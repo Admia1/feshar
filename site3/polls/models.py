@@ -91,22 +91,23 @@ class PollUser(models.Model):
 
     def present_time(self):
         return 3 * self.usr_set.filter(is_present = True).count()
-    def f_present_time(self):
-        return farsi(self.present_time())
 
     def extra_time(self):
         r = 0
         for ew in self.extrawork_set.all():
             r+= ew.hour
         return r
+        
+    def reserved_time(self):
+        return 3 * self.usr_set.count()
 
     def total_time(self):
         return self.present_time() + self.extra_time()
+
+    def f_present_time(self):
+        return farsi(self.present_time())
     def f_total_time(self):
         return farsi(self.total_time())
-
-    def reserved_time(self):
-        return 3 * self.usr_set.count()
     def f_reserved_time(self):
         return farsi(self.reserved_time())
 

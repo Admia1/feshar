@@ -28,7 +28,6 @@
       </thead>
         <tbody>
         {% for polluser in pollusers %}
-        <!-- {% if polluser.total_time %} -->
         <tr>
           <td>{{ polluser.show_name }}</td>
           <td>{{ polluser.f_total_time }}</td>
@@ -36,7 +35,6 @@
           <td>{{ polluser.f_student_number }}</td>
           <!-- <td>{{ polluser.f_national_id }}</td> -->
         </tr>
-        <!-- {% endif %} -->
         {% endfor %}
       </tbody>
     </table>
