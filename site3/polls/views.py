@@ -275,7 +275,7 @@ def site_status_view(request, new_state):
 def delete_extra_work(request, extra_work_pk):
     if request.user.is_staff:
         try :
-            ew = ExtraWork.objects.filter(pk = extra_work_pk)
+            ew = ExtraWork.objects.get(pk = extra_work_pk)
             polluser_pk = ew.polluser.pk
             ew.delete()
         return HttpResponseRedirect(reverse('polls:user' ,kwargs={'polluser_pk' : polluser_pk}))
