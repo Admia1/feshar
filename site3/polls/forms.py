@@ -35,6 +35,6 @@ class LoginForm(forms.Form):
 class NationalIdForm(forms.Form):
     national_id = forms.CharField(widget=forms.NumberInput(attrs={'class':'form-control'}))
 
-class ExtraWorkForm(form.Form):
+class ExtraWorkForm(forms.Form):
     info = form.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
     hour = forms.IntegerField(widget=forms.NumberInput(attrs={'class':'form-control'}))
