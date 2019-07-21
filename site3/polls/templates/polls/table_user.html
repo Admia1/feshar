@@ -21,19 +21,15 @@
         <tr>
           <th>نام</th>
           <th>ساعات حضور</th>
-          <th>ساعات رزرو</th>
           <th>شماره دانشجویی</th>
-          <!-- <th>کد ملی</th> -->
         </tr>
       </thead>
         <tbody>
         {% for polluser in pollusers %}
         <tr>
           <td><a href="{% url 'polls:user' polluser.pk %}" style="color:black">{{ polluser.show_name }}</a></td>
-          <td>{{ polluser.f_total_time }}</td>
-          <td>{{ polluser.f_reserved_time }}</td>
-          <td>{{ polluser.f_student_number }}</td>
-          <!-- <td>{{ polluser.f_national_id }}</td> -->
+          <td>{{ polluser.total_time }}</td>
+          <td>{{ polluser.student_number }}</td>
         </tr>
         {% endfor %}
       </tbody>
