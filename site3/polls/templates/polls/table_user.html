@@ -32,7 +32,7 @@
           <td><a href="{% url 'polls:user' polluser.pk %}" style="color:black">{{ polluser.show_name }}</a></td>
           <td>{{ polluser.total_time }}</td>
           <td>{{ polluser.student_number }}</td>
-          <td>{{ polluser.payment_id_show }}</td>
+          <td>{{ polluser.payment_id }}</td>
         </tr>
         {% endif %}
         {% endfor %}
