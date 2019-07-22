@@ -64,7 +64,7 @@
                   </tr>
                   <tr>
                     <td>شماره حساب</td>
-                    <td>{{ polluser.payment_id_show }}</td>
+                    <td><a href="{% url 'polls:get_payment_id' %}">{{ polluser.payment_id_show }}</a></td>
                   </tr>
                 </tbody>
               </table>
