@@ -8,11 +8,11 @@
         {% csrf_token %}
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-              {% if error_message %}
-                <p class="bg-danger p-d ml-b">{{ error_message }}</p>
-              {% endif %}
                 <div class="panel-heading">لطفا شماره حساب خود را وارد کنید</div>
                 <div class="panel-body">
+                  {% if error_message %}
+                    <p class="bg-danger p-d ml-b">{{ error_message }}</p>
+                  {% endif %}
                     <div class="form-group clearfix">
                         <label  class="col-md-4 control-label text-right">شماره حساب</label>
                         <div class="col-md-6">
