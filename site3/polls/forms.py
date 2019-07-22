@@ -36,7 +36,7 @@ class NationalIdForm(forms.Form):
     national_id = forms.CharField(widget=forms.NumberInput(attrs={'class':'form-control'}))
 
 class PaymentIdForm(forms.Form):
-    national_id = forms.CharField(widget=forms.NumberInput(attrs={'class':'form-control'}))
+    payment_id = forms.CharField(widget=forms.NumberInput(attrs={'class':'form-control'}))
 
 class ExtraWorkForm(forms.Form):
     info = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
