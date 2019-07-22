@@ -59,6 +59,7 @@ class PollUser(models.Model):
     entry_year = models.IntegerField()
     can_presure = models.BooleanField(default=0)
     sex = models.IntegerField(default=1)
+    payment_id = models.CharField(min_length=20, max_length=20, default="0000000000000000")
 
     def show_year(self):
         return entry_year_show(self.entry_year)
@@ -97,7 +98,7 @@ class PollUser(models.Model):
         for ew in self.extrawork_set.all():
             r+= ew.hour
         return r
-        
+
     def reserved_time(self):
         return 3 * self.usr_set.count()
 
@@ -110,6 +111,10 @@ class PollUser(models.Model):
         return farsi(self.total_time())
     def f_reserved_time(self):
         return farsi(self.reserved_time())
+
+    def payment_id_show(self):
+        str = self.payment_id[0:4] + "_" + self.payment_id[5:8] + "_" +self.payment_id[9:12] + "_" +self.payment_id[13:16]
+        return str
 
 class EventDay(models.Model):
     day = models.IntegerField()
