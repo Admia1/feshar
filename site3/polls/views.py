@@ -96,7 +96,7 @@ def home_view(request):
         polluser = PollUser.objects.get(user=request.user)
         if(polluser.national_id == "0"):#when user got no national_id
             return HttpResponseRedirect(reverse('polls:get_national_id'))
-        if(not polluser.payment_id_valid)
+        if(not polluser.payment_id_valid):
             return HttpResponseRedirect(reverse('polls:get_payment_id'))
         error_message = ""
 
