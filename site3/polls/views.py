@@ -96,7 +96,8 @@ def home_view(request):
         polluser = PollUser.objects.get(user=request.user)
         if(polluser.national_id == "0"):#when user got no national_id
             return HttpResponseRedirect(reverse('polls:get_national_id'))
-
+        if(not polluser.payment_id_valid)
+            return HttpResponseRedirect(reverse('polls:get_payment_id'))
         error_message = ""
 
         if request.method == 'POST':
@@ -237,6 +238,7 @@ def get_payment_id_view(request):
                     return HttpResponseRedirect(reverse('polls:home'))
                 else:
                     error_message = "طول شماره حساب باید 16 رفم باشد!!!"
+                    form = PaymentIdForm()
                     return render(request, template, {'form': form, 'error_message': error_message})
         else:
             form = PaymentIdForm()
