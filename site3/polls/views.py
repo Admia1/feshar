@@ -221,7 +221,7 @@ def get_national_id_view(request):
         return render(request, template, {'form': form})
     return HttpResponseRedirect(reverse('polls:register'))
 
-def get_national_id_view(request):
+def get_payment_id_view(request):
     # if this is a POST request we need to process the form data
     template = 'polls/get_payment_id.html'
     if(request.user.is_authenticated):
