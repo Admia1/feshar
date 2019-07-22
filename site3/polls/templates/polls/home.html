@@ -29,9 +29,55 @@
   </div>
   {% endif %}
 
+
+  <div class="container">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">اطلاعات شما</div>
+          <div class="panel-body">
+            <div class="col-md-12 col-md-offset-0">
+              <table class="table table-striped">
+                <tbody>
+                  <tr>
+                    <td>نام</td>
+                    <td>{{ polluser.first_name }}</td>
+                  </tr>
+                  <tr>
+                    <td>نام خانوادگی</td>
+                    <td>{{ polluser.last_name }}</td>
+                  </tr>
+                  <tr>
+                    <td>کد ملی</td>
+                    <td>{{ polluser.f_national_id }}</td>
+                  </tr>
+                  <tr>
+                    <td>شماره دانشجویی</td>
+                    <td>{{ polluser.f_student_number }}</td>
+                  </tr>
+                  <tr>
+                    <td>ورودی</td>
+                    <td>{{ polluser.show_year }}</td>
+                  </tr>
+                  <tr>
+                    <td>شماره تلفن</td>
+                    <td>{{ polluser.f_phone_number }}</td>
+                  </tr>
+                  <tr>
+                    <td>شماره حساب</td>
+                    <td>{{ polluser.payment_id_show }}</td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <div class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">
-      <div class="panel-heading">تایم های رزرو شده توسط شما</div>
+      <div class="panel-heading">شیفت های رزرو شده توسط شما</div>
         <div class="panel-body">
           <div class="col-md-12 col-md-offset-0">
           {% for usr in usr_detail %}
