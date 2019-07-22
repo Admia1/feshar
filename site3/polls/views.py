@@ -239,7 +239,7 @@ def get_payment_id_view(request):
                     error_message = "طول شماره حساب باید 16 رفم باشد!!!"
                     return render(request, template, {'form': form, 'error_message': error_message})
         else:
-            form = paIdForm()
+            form = PaymentIdForm()
         return render(request, template, {'form': form})
     return HttpResponseRedirect(reverse('polls:register'))
 
