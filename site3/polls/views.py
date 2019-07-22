@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
-from .forms import RegisterForm, LoginForm, NationalIdForm, ExtraWorkForm
+from .forms import RegisterForm, LoginForm, NationalIdForm, ExtraWorkForm, PaymentIdForm
 from django.contrib.auth import  login, logout
 from .models import PollUser,Section,EventDay,USR,entry_year_show, Config, ExtraWork
 from django.urls import reverse
@@ -218,6 +218,28 @@ def get_national_id_view(request):
                 return HttpResponseRedirect(reverse('polls:home'))
         else:
             form = NationalIdForm()
+        return render(request, template, {'form': form})
+    return HttpResponseRedirect(reverse('polls:register'))
+
+def get_national_id_view(request):
+    # if this is a POST request we need to process the form data
+    template = 'polls/get_payment_id.html'
+    if(request.user.is_authenticated):
+        error_message = ""
+        if request.method == 'POST':
+            form = paymentIdForm(request.POST)
+            if form.is_valid():
+                payment_id = form.cleaned_data['paymnet_id']
+                if len(payment_id == 16):
+                    polluser = PollUser.objects.get(user=request.user)
+                    polluser.payment_id = payment_id
+                    polluser.save()
+                    return HttpResponseRedirect(reverse('polls:home'))
+                else:
+                    error_message = "طول شماره حساب باید 16 رفم باشد!!!"
+                    return render(request, template, {'form': form, 'error_message': error_message})
+        else:
+            form = paIdForm()
         return render(request, template, {'form': form})
     return HttpResponseRedirect(reverse('polls:register'))
 

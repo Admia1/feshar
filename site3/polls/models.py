@@ -112,6 +112,9 @@ class PollUser(models.Model):
     def f_reserved_time(self):
         return farsi(self.reserved_time())
 
+    def payment_id_valid(self):
+        return self.payment_id != "0000000000000000"
+
     def payment_id_show(self):
         str = self.payment_id[0:4] + "_" + self.payment_id[5:8] + "_" +self.payment_id[9:12] + "_" +self.payment_id[13:16]
         return str

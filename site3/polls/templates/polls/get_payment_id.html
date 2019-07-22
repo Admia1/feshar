@@ -1,0 +1,27 @@
+{% extends "polls/base.html" %}
+{% block data %}
+<a href="{% url 'polls:logout' %}"class="logout-submit">خروج</a>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <form action="{% url 'polls:get_national_id' %}" method="post">
+        {% csrf_token %}
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">لطفا شماره حساب خود را وارد کنید</div>
+                <div class="panel-body">
+                    <div class="form-group clearfix">
+                        <label  class="col-md-4 control-label text-right">شماره حساب</label>
+                        <div class="col-md-6">
+                            {{ form.payment_id }}
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-md-offset-4">
+                        <input type="submit" value="تایید" class="btn btn-success">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

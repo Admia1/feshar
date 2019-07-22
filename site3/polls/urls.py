@@ -13,6 +13,7 @@ urlpatterns = [
     path('gp/', views.gp_student_view, name='gp'),
     path('cant/', views.cant_view, name='cant'),
     path('get_national_id/', views.get_national_id_view, name='get_national_id'),
+    path('get_payment_id/', views.get_payment_id_view, name='get_payment_id'),
     path('table_shift/', views.table_shift_view, name='table_shift'),
     path('table_user/', views.table_user_view , name='table_user'),
 
