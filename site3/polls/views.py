@@ -121,7 +121,7 @@ def home_view(request):
         section_detail = [[section for section in day.section_set.order_by('index', 'station') if section.usr_set.count()<3] for day in EventDay.objects.all().order_by('day')]
         usr_detail = [usr for usr in USR.objects.filter(polluser__user=request.user)]
         config  = Config.objects.first()
-        return render(request, template, {'section_detail': section_detail, 'error_message': error_message, 'usr_detail': usr_detail, 'config': config})
+        return render(request, template, {'section_detail': section_detail, 'error_message': error_message, 'usr_detail': usr_detail, 'config': config, 'polluser':polluser})
     else:
         return HttpResponseRedirect(reverse('polls:register'))
 
