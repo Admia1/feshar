@@ -59,7 +59,7 @@ class PollUser(models.Model):
     entry_year = models.IntegerField()
     can_presure = models.BooleanField(default=0)
     sex = models.IntegerField(default=1)
-    payment_id = models.CharField(min_length=20, max_length=20, default="0000000000000000")
+    payment_id = models.CharField(max_length=21, default="0000000000000000")
 
     def show_year(self):
         return entry_year_show(self.entry_year)
