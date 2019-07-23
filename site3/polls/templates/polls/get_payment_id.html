@@ -4,7 +4,7 @@
 {% endblock %}
 {% block content %}
 <div class="container">
-    <form action="{% url 'polls:get_national_id' %}" method="post">
+    <form action="{% url 'polls:get_payment_id' %}" method="post">
         {% csrf_token %}
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
