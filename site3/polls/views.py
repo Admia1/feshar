@@ -228,7 +228,7 @@ def get_payment_id_view(request):
     if(request.user.is_authenticated):
         error_message = ""
         if request.method == 'POST':
-            form = paymentIdForm(request.POST)
+            form = PaymentIdForm(request.POST)
             if form.is_valid():
                 payment_id = form.cleaned_data['payment_id']
                 if len(payment_id == 16):
