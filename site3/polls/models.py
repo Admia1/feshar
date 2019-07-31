@@ -29,9 +29,9 @@ def entry_year_show(x):
         return arr[x];
     else:
         return "سالی که وارد شد"
-def farsi(x):
-    x=str(x)
-    num = {
+def farsi(number):
+    number_string = str(number)
+    farsi_dictionary = {
     '0':'۰',
     '1':'۱',
     '2':'۲',
@@ -43,9 +43,9 @@ def farsi(x):
     '8':'۸',
     '9':'۹',
     }
-    for y in num:
-        x=x.replace(y,num[y])
-    return x
+    for digit in num:
+        number_string = number_string.replace(digit, farsi_dictionary[digit])
+    return number_string
 
 
 
@@ -72,12 +72,16 @@ class PollUser(models.Model):
             return "بله"
         else:
             return "خیر"
+
     def __str__(self):
         return self.first_name + " " + self.last_name
+
     def f_student_number(self):
         return farsi(self.student_number)
+
     def f_phone_number(self):
         return farsi(self.phone_number)
+
     def f_national_id(self):
         return farsi(self.national_id)
 
@@ -94,10 +98,10 @@ class PollUser(models.Model):
         return 3 * self.usr_set.filter(is_present = True).count()
 
     def extra_time(self):
-        r = 0
-        for ew in self.extrawork_set.all():
-            r+= ew.hour
-        return r
+        time = 0
+        for extra_work in self.extrawork_set.all():
+            time += extra_work.hour
+        return time
 
     def reserved_time(self):
         return 3 * self.usr_set.count()
@@ -107,8 +111,10 @@ class PollUser(models.Model):
 
     def f_present_time(self):
         return farsi(self.present_time())
+
     def f_total_time(self):
         return farsi(self.total_time())
+
     def f_reserved_time(self):
         return farsi(self.reserved_time())
 
@@ -116,8 +122,8 @@ class PollUser(models.Model):
         return self.payment_id != "0000000000000000"
 
     def payment_id_show(self):
-        str = self.payment_id[0:4] + "_" + self.payment_id[5:8] + "_" +self.payment_id[9:12] + "_" +self.payment_id[13:16]
-        return str
+        output_string = self.payment_id[0:4] + "_" + self.payment_id[5:8] + "_" +self.payment_id[9:12] + "_" +self.payment_id[13:16]
+        return output_string
 
 class EventDay(models.Model):
     day = models.IntegerField()
@@ -167,20 +173,17 @@ class Section(models.Model):
         return self.usr_set.count() >= 3
 
     def anti_tatbiq(self):
-        a=0
+        number_of_girls =0
         for usr in self.usr_set.all():
-            a+=usr.polluser.sex
-        if a==0 :
+            number_of_girls += usr.polluser.sex
+        if number_of_girls==0 :
             return True
-        elif a>=3 :
-            if self.station == 3:
-                return True
 
     def show_detail(self):
-        ret = self.show()
+        output = self.show()
         if self.usr_set.count() >= 3:
-            ret += " پر است!! "
-        return ret
+            output += " پر است!! "
+        return output
 
 class USR(models.Model):
     polluser = models.ForeignKey(PollUser ,on_delete=models.CASCADE)
