@@ -7,15 +7,14 @@ from .models import PollUser,Section,EventDay,USR,entry_year_show, Config, Extra
 from django.urls import reverse
 
 def register_view(request):
-    # if this is a POST request we need to process the form data
+
     template = 'polls/register.html'
     if(request.user.is_authenticated):
         return HttpResponseRedirect(reverse('polls:home'))
     else:
         if request.method == 'POST':
-            # create a form instance and populate it with data from the request:
+
             form = RegisterForm(request.POST)
-            # check whether it's valid:
             if form.is_valid():
                 if User.objects.filter(username=form.cleaned_data['student_number']).exists():
                     return render(request, template, {
@@ -33,22 +32,19 @@ def register_view(request):
                     polluser.first_name = form.cleaned_data['first_name']
                     polluser.last_name = form.cleaned_data['last_name']
                     polluser.phone_number = form.cleaned_data['phone_number']
-                    # polluser.entry_year = form.cleaned_data['entry_year']
                     polluser.national_id = form.cleaned_data['national_id']
+
                     polluser.entry_year = int(request.POST['entry_year'])
                     polluser.entry_year -= 1
+
                     polluser.student_number = form.cleaned_data['student_number']
                     polluser.can_presure = form.cleaned_data['can_presure']
                     polluser.sex = request.POST['sex']
                     polluser.save()
 
-
                     login(request, user)
 
-                    # redirect to accounts page:
                     return HttpResponseRedirect(reverse('polls:home'))
-
-       # No post data availabe, let's just show the page.
         else:
             form = RegisterForm()
 
@@ -62,9 +58,7 @@ def logout_view(request):
 
 
 def login_view(request):
-    # if this is a POST request we need to process the form data
     template = 'polls/login.html'
-
     if request.user.is_authenticated :
         return HttpResponseRedirect(reverse('polls:home'))
 
@@ -72,7 +66,6 @@ def login_view(request):
         form = LoginForm(request.POST)
 
         if request.method == 'POST':
-            # check whether it's valid:
             if form.is_valid():
                 if User.objects.filter(username=form.cleaned_data['username']).exists():
                     user = User.objects.get(username=form.cleaned_data['username'])
@@ -85,7 +78,6 @@ def login_view(request):
                     'error_message': 'شماره دانشجویی یا رمز عبور اشتباه می باشد'
                 })
 
-       # No post data availabe, let's just show the page.
         else:
             form = LoginForm()
         return render(request, template, {'form': form})
@@ -140,7 +132,6 @@ def delete_view(request, usr_pk):
                 return HttpResponseRedirect(reverse('polls:home'))
         except:
             return HttpResponseRedirect('polls:home')
-
     else:
         return HttpResponseRedirect(reverse('polls:register'))
 
@@ -291,16 +282,16 @@ def change_present_view(request, usr_pk, new_state):
 
 def site_status_view(request, new_state):
     if request.user.is_superuser:
-        c = Config.objects.first()
-        c.site_online = new_state
-        c.save()
+        config = Config.objects.first()
+        config.site_online = new_state
+        config.save()
     return HttpResponseRedirect(reverse('polls:home'))
 
 def delete_extra_work(request, extra_work_pk, polluser_pk):
     if request.user.is_staff:
         try :
-            ew = ExtraWork.objects.get(pk = extra_work_pk)
-            ew.delete()
+            extra_work = ExtraWork.objects.get(pk = extra_work_pk)
+            extra_work.delete()
             return HttpResponseRedirect(reverse('polls:user' ,kwargs={'polluser_pk' : polluser_pk}))
         except:
             return HttpResponseRedirect(reverse('polls:user' ,kwargs={'polluser_pk' : polluser_pk}))
