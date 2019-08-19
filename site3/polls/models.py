@@ -43,7 +43,7 @@ def farsi(number):
     '8':'۸',
     '9':'۹',
     }
-    for digit in number:
+    for digit in number_string:
         number_string = number_string.replace(digit, farsi_dictionary[digit])
     return number_string
 
