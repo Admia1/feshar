@@ -222,7 +222,8 @@ def get_payment_id_view(request):
             form = PaymentIdForm(request.POST)
             if form.is_valid():
                 payment_id = form.cleaned_data['payment_id']
-                if len(payment_id) == 16:
+                #if len(payment_id) == 16:
+                if 1==1:
                     polluser = PollUser.objects.get(user=request.user)
                     polluser.payment_id = payment_id
                     polluser.save()
