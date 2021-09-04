@@ -204,7 +204,7 @@ class USR(models.Model):
 
 
 class Config(models.Model):
-    first_deleteable_day = models.IntegerField(default=0 )
+    first_deleteable_day = models.IntegerField(default=0)
     site_online = models.IntegerField(default=0 )
 
 class ExtraWork(models.Model):
