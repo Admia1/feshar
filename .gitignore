@@ -133,3 +133,5 @@ venv.bak/
 
 # statics
 
+# passwords
+.pass
