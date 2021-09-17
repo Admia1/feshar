@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django_jalali.db import models as jmodels
 
 def sex_show(x):
     if(x==0):
@@ -141,6 +142,8 @@ class Section(models.Model):
     eventday = models.ForeignKey(EventDay, on_delete=models.CASCADE)
     index = models.IntegerField(default=1)
     station = models.IntegerField(default=1)
+    start = jmodels.jDateTimeField()
+    end = jmodels.jDateTimeField()
 
 
     def detail_show(self):
