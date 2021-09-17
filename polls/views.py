@@ -6,6 +6,10 @@ from django.contrib.auth import  login, logout
 from .models import PollUser,Section,EventDay,USR,entry_year_show, Config, ExtraWork
 from django.urls import reverse
 
+from redis import Redis
+redis = Redis.from_url('redis://localhost:6379/1')
+from pottery import Redlock
+
 def register_view(request):
 
     template = 'polls/register.html'
@@ -95,6 +99,9 @@ def home_view(request):
         if request.method == 'POST':
             section = Section.objects.get(pk=request.POST['section_pk'])
 
+            reserve_lock = Redlock(key=f"res{section.pk}", masters={redis}, auto_release_time=60*1000)
+            reserve_lock.acquire()
+
             usrs = section.usr_set.all()
             if len(usrs) >= 3:
                 error_message = "این شیفت در این تاریخ و ایستگاه پر شده است"
@@ -110,9 +117,10 @@ def home_view(request):
                     else:
                         error_message = "هم اکنون امکان رزرو شیفت وجود ندارد"
 
+            reserve_lock.release()
         section_detail = [[section for section in day.section_set.order_by('index', 'station') if section.usr_set.count()<3] for day in EventDay.objects.all().order_by('day')]
         usr_detail = [usr for usr in USR.objects.filter(polluser__user=request.user)]
-        config  = Config.objects.first()
+        config = Config.objects.first()
         return render(request, template, {'section_detail': section_detail, 'error_message': error_message, 'usr_detail': usr_detail, 'config': config, 'polluser':polluser})
     else:
         return HttpResponseRedirect(reverse('polls:register'))
