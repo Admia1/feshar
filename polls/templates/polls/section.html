@@ -6,7 +6,7 @@
 <div class="container">
   <div class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">
-      <div class="panel-heading" {% if section.anti_tatbiq %}style="color:red"{% endif %}>{{ section.show }}</div>
+      <div class="panel-heading" {% if section.anti_tatbiq %}style="color:red"{% endif %}>{{ section.header_with_date }}</div>
       <div class="panel-body">
         <div class="col-md-12 col-md-offset-0">
           {% for usr in section.usr_set.all %}
@@ -18,7 +18,7 @@
             <input type="submit" value="غائب" class="btn btn-danger  btn-xs" name="iii">
             {% endif %}
             {% csrf_token %}
-            <a href="{% url 'polls:user' usr.polluser.pk %}">{{ usr.polluser.show_name }}</a>
+            <a href="{% url 'polls:user' usr.polluser.pk %}">{{ usr.polluser.full_name }}</a>
           </form>
           {% endfor %}
         </div>

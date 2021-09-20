@@ -26,8 +26,9 @@ urlpatterns = [
     path('change_usr_present/<int:usr_pk>/<int:new_state>/', views.change_present_view, name='change_usr_present'),
     path('sections/', views.sections_view, name='sections'),
 
-    path('config/site_status/<int:new_state>/', views.site_status_view ,name='site_status'),
     path('delete_extra_work/<int:extra_work_pk>/<int:polluser_pk>/', views.delete_extra_work ,name='delete_extra_work'),
+
+    path('staff/<int:polluser_pk>/<int:new_state>', views.staff_veiw, name='staff_state'),
 
     path('', views.register_view, name='base'),
 ]

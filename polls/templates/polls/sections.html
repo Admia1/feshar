@@ -3,19 +3,72 @@
 <a href="{% url 'polls:logout' %}"class="logout-submit">خروج</a>
 {% endblock %}
 {% block content %}
-{% for sec_list in section_detail %}
+<div class="container">
+    <form action="{% url 'polls:sections' %}" method="post">
+        {% csrf_token %}
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">ثبت شیفت جدید</div>
+                <div class="panel-body">
+                    {% if error_message %}
+                        <p class="bg-danger p-d ml-b">{{ error_message }}</p>
+                    {% endif %}
+
+                    <div class="form-group clearfix">
+                        <label class="col-md-4 control-label text-right">عنوان</label>
+                        <div class="col-md-6">
+                            <input type="text" name="header">
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <label class="col-md-4 control-label text-right">جزییات</label>
+                        <div class="col-md-6">
+                            <input type="bigtext" name="detail">
+                        </div>
+                    </div>
+                    {% for date, name in needed_dates %}
+                    <div class="form-group clearfix">
+                      <label class="col control-label text-right">{{name}}</label>
+                      <div class="col">
+                      <input type="Number" name="{{date}}__day" value="{{current_datetime.day}}">
+                      <select name="{{date}}__month" >
+                        {% for month in months%}
+                        <option value={{forloop.counter}} {% if forloop.counter == current_datetime.month %} {{ 'selected="selected"' }}{% endif %} >{{ month }}</option>
+                        {% endfor %}
+                      </select>
+                      <input type="Number" name="{{date}}__year" value="{{current_datetime.year}}">
+                    </div>
+                    <div class="col">
+                      <input type="number" name="{{date}}__minute" value="{{current_datetime.minute}}">
+                      <input type="number" name="{{date}}__hour" value="{{current_datetime.hour}}">
+                    </div>
+                      <br>
+                    </div>
+                    {% endfor %}
+                    <div class="form-group clearfix">
+                        <div class="col-md-6 col-md-offset-4">
+                            <input type="submit" value="ثبت شیفت جدید" class="btn btn-success">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% for sec_list in sections %}
 {% for section in sec_list %}
 <div class="container">
   <div class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">
-      <div class="panel-heading" ><a href="{% url 'polls:section' section.pk %}"{% if section.anti_tatbiq %}style="color:red"{% endif %}>{{ section.show }}</a></div>
+      <div class="panel-heading" ><a href="{% url 'polls:section' section.pk %}"{% if section.anti_tatbiq %}style="color:red"{% endif %}>{{ section.header_with_date }}</a></div>
         <div class="panel-body">
           <div class="col-md-12 col-md-offset-0">
             <table class="table">
               <tbody>
                 <tr>
                   {% for usr in section.usr_set.all %}
-                  <td><a href="{% url 'polls:user' usr.polluser.pk %}">{{ usr.polluser.show_name }}</a></td>
+                  <td><a href="{% url 'polls:user' usr.polluser.pk %}">{{ usr.polluser.full_name }}</a></td>
                   {% endfor %}
                 </tr>
               </tbody>

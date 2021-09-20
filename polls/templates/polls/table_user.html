@@ -29,7 +29,7 @@
         {% for polluser in pollusers %}
         {% if polluser.total_time %}
         <tr>
-          <td><a href="{% url 'polls:user' polluser.pk %}" style="color:black">{{ polluser.show_name }}</a></td>
+          <td><a href="{% url 'polls:user' polluser.pk %}" style="color:black">{{ polluser.full_name }}</a></td>
           <td>{{ polluser.total_time }}</td>
           <td>{{ polluser.student_number }}</td>
           <td>{{ polluser.payment_id }}</td>

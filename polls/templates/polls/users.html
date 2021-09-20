@@ -19,7 +19,7 @@
                 </tr>
                 {% for polluser in pollusers %}
                 <tr>
-                  <td><a href="{% url 'polls:user' polluser.pk %}">{{ polluser.show_name }}</a></td>
+                  <td><a href="{% url 'polls:user' polluser.pk %}">{{ polluser.full_name }}</a></td>
                   <td>{{polluser.f_usr_count}}</td>
                   <td>{{polluser.show_year}}</td>
                   <td>{{polluser.can_str}}</td>

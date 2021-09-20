@@ -30,9 +30,9 @@ def entry_year_show(x):
         return arr[x];
     else:
         return "سالی که وارد شد"
-def farsi(number):
-    number_string = str(number)
-    farsi_dictionary = {
+
+def fa_num(number):
+    fa_dic = {
     '0':'۰',
     '1':'۱',
     '2':'۲',
@@ -44,11 +44,7 @@ def farsi(number):
     '8':'۸',
     '9':'۹',
     }
-    for digit in number_string:
-        number_string = number_string.replace(digit, farsi_dictionary[digit])
-    return number_string
-
-
+    return "".join([fa_dic.get(x,x) for x in [y for y in str(number)]])
 
 class PollUser(models.Model):
     user = models.ForeignKey(User ,on_delete=models.CASCADE)
@@ -65,7 +61,7 @@ class PollUser(models.Model):
     def show_year(self):
         return entry_year_show(self.entry_year)
 
-    def show_name(self):
+    def full_name(self):
         return sex_show(self.sex) + " " + self.first_name + " " + self.last_name
 
     def can_str(self):
@@ -78,13 +74,13 @@ class PollUser(models.Model):
         return self.first_name + " " + self.last_name
 
     def f_student_number(self):
-        return farsi(self.student_number)
+        return fa_num(self.student_number)
 
     def f_phone_number(self):
-        return farsi(self.phone_number)
+        return fa_num(self.phone_number)
 
     def f_national_id(self):
-        return farsi(self.national_id)
+        return fa_num(self.national_id)
 
     def is_gp_student(self):
         if len(self.student_number) == 10:
@@ -93,7 +89,7 @@ class PollUser(models.Model):
         return False
 
     def f_usr_count(self):
-        return farsi(self.usr_set.count())
+        return fa_num(self.usr_set.count())
 
     def present_time(self):
         return 3 * self.usr_set.filter(is_present = True).count()
@@ -111,13 +107,13 @@ class PollUser(models.Model):
         return self.present_time() + self.extra_time()
 
     def f_present_time(self):
-        return farsi(self.present_time())
+        return fa_num(self.present_time())
 
     def f_total_time(self):
-        return farsi(self.total_time())
+        return fa_num(self.total_time())
 
     def f_reserved_time(self):
-        return farsi(self.reserved_time())
+        return fa_num(self.reserved_time())
 
     def payment_id_valid(self):
         return self.payment_id != "0000000000000000"
@@ -126,51 +122,42 @@ class PollUser(models.Model):
         output_string = self.payment_id[0:4] + "_" + self.payment_id[5:8] + "_" +self.payment_id[9:12] + "_" +self.payment_id[13:16]
         return output_string
 
-class EventDay(models.Model):
-    day = models.IntegerField()
-
-    def show(self):
-        if self.day<31:
-           return farsi(self.day)+" خرداد "
-        else:
-            return farsi(self.day-31)+" تیر "
-
-    def __str__(self):
-        return self.show()
-
 class Section(models.Model):
-    eventday = models.ForeignKey(EventDay, on_delete=models.CASCADE)
-    index = models.IntegerField(default=1)
-    station = models.IntegerField(default=1)
+    header = models.CharField(max_length=100)
+    detail = models.TextField()
+
     start = jmodels.jDateTimeField()
     end = jmodels.jDateTimeField()
+    available_from = jmodels.jDateTimeField()
+    deletable_until = jmodels.jDateTimeField()
+
+    def date(self):
+        def date_format(j_date):
+            month_dic={
+            1:  'فروردین',
+            2:  'اردیبهشت',
+            3:  'خرداد',
+            4:  'تیر',
+            5:  'مرداد',
+            6:  'شهریور',
+            7:  'مهر',
+            8:  'آبان',
+            9:  'آذر',
+            10: 'دی',
+            11: 'بهمن',
+            12: 'اسفند'
+            }
+            return f"{fa_num(j_date.day)} {month_dic.get(j_date.month, j_date.month)} {fa_num(j_date.year)} {fa_num(j_date.hour)}:{fa_num(j_date.minute)}"
+
+        middle_string = 'الی'
+        return f"{date_format(self.start)} {middle_string} {date_format(self.end)}"
 
 
-    def detail_show(self):
-        if self.station ==1 :
-            ret = "ایسنگاه اول "
-        if self.station ==2 :
-            ret = "ایستگاه دوم "
-        if self.station ==3 :
-            ret = "ایستگاه سوم"
-
-        if(self.index==1):
-            ret+=  " شیفت اول ساعت ۸ الی ۱۱"
-        if(self.index==2):
-            ret+= " شیفت دوم ساعت ۱۱ الی ۱۴"
-        if(self.index==3):
-            ret+= " شیفت سوم ساعت ۱۴ الی ۱۷"
-        if(self.index==4):
-            ret+= " شیفت چهارم ساعت ۱۷ الی ۲۰"
-
-        return ret
-
-
-    def show(self):
-        return self.eventday.show() + self.detail_show()
+    def header_with_date(self):
+        return f"{self.date()} - {self.header}"
 
     def __str__(self):
-        return self.show()
+        return self.header_with_date()
 
     def is_full(self):
         return self.usr_set.count() >= 3
@@ -182,11 +169,6 @@ class Section(models.Model):
         if number_of_girls==0 :
             return True
 
-    def show_detail(self):
-        output = self.show()
-        if self.usr_set.count() >= 3:
-            output += " پر است!! "
-        return output
 
 class USR(models.Model):
     polluser = models.ForeignKey(PollUser ,on_delete=models.CASCADE)
@@ -206,9 +188,6 @@ class USR(models.Model):
             return 'red'
 
 
-class Config(models.Model):
-    first_deleteable_day = models.IntegerField(default=0)
-    site_online = models.IntegerField(default=0 )
 
 class ExtraWork(models.Model):
     polluser = models.ForeignKey(PollUser, on_delete=models.CASCADE)
@@ -216,4 +195,4 @@ class ExtraWork(models.Model):
     hour = models.IntegerField(default=0)
 
     def f_hour(self):
-        return farsi(self.hour)
+        return fa_num(self.hour)

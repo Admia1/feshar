@@ -28,7 +28,7 @@
     <nav class="navbar navbar-inverse" role="navigation" >
         <div class="container">
           {% block data %}{% endblock %}
-          {% if request.user.is_staff %}
+          {% if request.user.is_staff or request.user.is_superuser %}
           <a href="{% url 'polls:users' %}" class="logout-submit">کاربران</a>
           <a href="{% url 'polls:sections' %}" class="logout-submit">شیفت ها</a>
           <a href="{% url 'polls:gp' %}" class="logout-submit">پزشکی</a>

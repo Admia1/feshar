@@ -18,15 +18,15 @@
   <body>
     <tbody>
       <table class="table">
-        {% for sec_list in section_detail %}
+        {% for sec_list in sections %}
         {% for section in sec_list %}
             <tr>
-              <th>{{ section.detail_show }}</th>
-              <th>{{ section.eventday.show }}</th>
+              <th>{{ section.header_with_date }}</th>
+              <th>{{ section.date }}</th>
             </tr>
               {% for usr in section.usr_set.all %}
               <tr>
-                <td>{{ usr.polluser.show_name }}<p style="color:{{ usr.ip_color }} ">{{ip_show}}</p></td>
+                <td>{{ usr.polluser.full_name }}<p style="color:{{ usr.ip_color }} ">{{ip_show}}</p></td>
                 <td>{{ usr.polluser.f_student_number }}</td>
                 <td>{{ usr.polluser.f_national_id }}</td>
               </tr>

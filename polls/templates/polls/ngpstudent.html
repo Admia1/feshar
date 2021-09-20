@@ -21,7 +21,7 @@
                 {% else %}
                 {% if polluser.usr_set.count %}
                 <tr>
-                  <td><a href="{% url 'polls:user' polluser.pk %}">{{ polluser.show_name }}</a></td>
+                  <td><a href="{% url 'polls:user' polluser.pk %}">{{ polluser.full_name }}</a></td>
                   <td>{{ polluser.f_student_number }}</td>
                   <td>{{ polluser.f_phone_number }}</td>
                 </tr>

@@ -46,6 +46,10 @@
                   <td>آیا به نحوه گرفتن فشار خون آگاه است</td>
                   <td>{{polluser.can_str}}</td>
                 </tr>
+                <tr>
+                  <td>وضعیت کاربر</td>
+                  <td>{% if polluser.user.is_staff %}{{ 'ناظر' }}{% else %}{ 'کاربر عادی' }{% endif %}</td>
+                </tr>
               </tbody>
             </table>
         </div>
@@ -53,6 +57,29 @@
     </div>
   </div>
 </div>
+
+<div class="container">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">تغییر سطح دسترسی</div>
+        <div class="panel-body">
+          <div class="col-md-12 col-md-offset-0">
+
+            <div class="col-md-6 col-md-offset-4 btn btn-success">
+              <a href="{% url 'polls:staff_state' polluser.pk 1 %}">ارتقاع به ناظر</a>
+            </div>
+
+            <div class="col-md-6 col-md-offset-4 btn btn-danger">
+              <a href="{% url 'polls:staff_state' polluser.pk 0 %}">تبدیل به کاربر عادی</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+
 <div class="container">
   <form action="{% url 'polls:user' polluser.pk %}" method="post">
     {% csrf_token %}
@@ -94,7 +121,7 @@
           <div class="col-md-12 col-md-offset-0">
             <ul>
               {% for usr in polluser.usr_set.all %}
-                <li><a href="{% url 'polls:section' usr.section.pk %}">{{ usr.section.show }}</a></li>
+                <li><a href="{% url 'polls:section' usr.section.pk %}">{{ usr.section.header_with_date }}</a></li>
               {% endfor %}
             </ul>
         </div>
